@@ -40,7 +40,7 @@ export default function SaveUserReducer(state = initialState, action) {
             registerResponse: action.payload
           }
         };
-      }
+      }  
 
     case actionTypes.RESET_REGISTER:
       return {
@@ -51,6 +51,13 @@ export default function SaveUserReducer(state = initialState, action) {
           successfulRegister: -1,
         },
       };
+
+
+      case actionTypes.GET_IMAGE: console.log(action.payload);
+      return action.payload
+
+      case actionTypes.POST_IMAGE: console.log(action.payload);
+      return action.payload
 
     default:
       return state;

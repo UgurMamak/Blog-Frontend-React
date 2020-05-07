@@ -1,5 +1,9 @@
 import { API } from "../../helpers/api-config";
-import { PostWithUrlBody } from "../../helpers/url-helper";
+import {
+  PostWithUrlBody,
+  GetWithUrl,
+  PostWithUrlBodyImage,
+} from "../../helpers/url-helper";
 /* Action Types */
 //REGİSTER
 const GET_USER_SUCCESS = "GET_USER_SUCCESS"; //userları listeleme işlemi için
@@ -12,6 +16,9 @@ const GET_USER_LOGIN_SUCCESS = "GET_USER_LOGIN_SUCCESS";
 const POST_USER_LOGIN_SUCCESS = "POST_USER_LOGIN_SUCCESS";
 const RESET_LOGIN = "RESET_LOGIN";
 
+const GET_IMAGE = "GET_IMAGE";
+const POST_IMAGE = "POST_IMAGE";
+
 export const actionTypes = {
   GET_USER_SUCCESS,
   CREATE_USER_SUCCESS,
@@ -20,6 +27,8 @@ export const actionTypes = {
   POST_USER_LOGIN_SUCCESS,
   RESET_LOGIN,
   RESET_REGISTER,
+  GET_IMAGE,
+  POST_IMAGE
 };
 
 //------------------------REGISTER------------------------------------
@@ -59,14 +68,10 @@ export function saveUser(user) {
   return (dispatch) => {
     PostWithUrlBody(API + "auth/register", user)
       .then((response) => {
-        if (response.status === 200) 
-        {
-          
+        if (response.status === 200) {
           return response.json();
           //dispatch(createUserSuccess(response));
-        } 
-        else {
-         
+        } else {
           return response.text();
           /*response.json().then((data) => {
             dispatch(createUserSuccess(data.message));
@@ -79,8 +84,6 @@ export function saveUser(user) {
       .catch((error) => console.log("Error when fetch register\n", error));
   };
 }
-
-
 
 //LOGIN
 export const LoginUser = (user) => {
@@ -99,5 +102,34 @@ export const LoginUser = (user) => {
         dispatch(PostUserLoginSuccess(responseJson));
       })
       .catch((error) => console.log("Error when fetch register\n", error));
+  };
+};
+
+//IMAGE SAVE
+export  function saveUserImage(user) {
+  return function(dispatch){
+   PostWithUrlBodyImage(API + "deneme/uploadfile3", user)
+  .then(response=> {return response.text();})
+  .catch(error => console.log("Error when fetch categories\n", error));
+  }
+}
+
+export function getImageSuccess(img) {
+  return { type: actionTypes.GET_IMAGE, payload: img };
+}
+
+export function postImageSuccess(img) {
+  return { type: actionTypes.POST_IMAGE, payload: img };
+}
+
+export function getResim() {
+  return function(dispatch){
+    GetWithUrl(API + "deneme/getimg")
+     // .then(response => {return response.json();})
+      .then(response => {return response.text();})
+
+      .then(response =>dispatch(getImageSuccess(response)))
+      
+      .catch(error => console.log("Error when fetch categories\n", error));
   };
 };
