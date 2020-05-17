@@ -14,7 +14,7 @@ export default class ResimEkleme3 extends Component {
         const data = new FormData()
         data.append('image', this.state.imageFile)
         const res = await fetch(
-      '	https://localhost:5001/deneme/uploadfile3',
+      '	https://localhost:44332/deneme/uploadfile3',
       {
         method: 'POST',
         body: data
