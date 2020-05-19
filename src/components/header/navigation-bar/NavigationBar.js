@@ -13,13 +13,11 @@ class NavigationBar extends Component {
   }
   state = {};
 
-  selectCategory(category)
-  {
-    this.props.actions.getCart(category.id);//seçilen kategoriye göre postcard listeleme işlemi
+  //seçilen kategoriyi gönderme işlemi
+  selectCategory(category) {
+    this.props.actions.getCart(category.id); //seçilen kategoriye göre postcard listeleme işlemi
+    this.props.actions.changeCategory(category.id)
   }
-
-
-
   render() {
     return (
       <div id="nav-bottom">
@@ -29,14 +27,19 @@ class NavigationBar extends Component {
               <Link to="/">Anasayfa</Link>
             </li>
             <li id="nav2" className="has-dropdown">
-              <a href="/">Kategoriler</a>
+              <Link to={""}>Kategoriler</Link>
 
               <div className="dropdown">
                 <div className="dropdown-body">
                   <ul className="dropdown-list">
                     {this.props.categories.map((category) => (
                       <li key={category.id}>
-                        <a  onClick={() => this.selectCategory(category)} >{category.categoryName}</a>
+                        <Link
+                        to={"/category/" + category.id}
+                          onClick={() => this.selectCategory(category)}
+                        >
+                          {category.categoryName}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -86,11 +89,11 @@ function mapDispatchToProps(dispatch) {
         dispatch
       ),
 
-        getCart:bindActionCreators(
-          postCartActions.getPostCartCategory,
-          dispatch
-        ),
-
+      getCart: bindActionCreators(
+        postCartActions.getPostCartCategory,
+        dispatch
+      ),
+      changeCategory: bindActionCreators(categoryActions.changeCategory,dispatch),
     },
   };
 }

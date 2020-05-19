@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { API } from "../../helpers/api-config";
+import { Link } from "react-router-dom";
 
 export default class PostCard extends Component {
-  render() {
+  render() { 
     return (
       <div>
         {this.props.postList.map((ps) => (
           <div className="col-md-6" key={ps.postId}>
             <div className="post">
-              <a className="post-img" href={"PostDetail/"+ps.postId}> 
+              <Link className="post-img" to={"PostDetail/"+ps.postId}> 
                 <img src={ps.thumbImage} alt="" />
                 <img src={API + "postImage/" + ps.imageName} alt="" />
-              </a>
-              <div className="post-body">
+              </Link>
+              <div className="post-body"> 
                 <div className="post-category">
                   {ps.postCategoryListDtos.map((pc) => (
                     <a href="category.html" key={pc.categoryId}>

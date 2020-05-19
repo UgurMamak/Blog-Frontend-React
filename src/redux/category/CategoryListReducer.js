@@ -1,6 +1,9 @@
 import {actionTypes} from "./CategoryActions";
-import initialState from "../initialState";
+//import initialState from "../initialState";
 
+const initialState={
+    categories:[]
+}
 export default function CategoryListReducer(state=initialState.categories,action)
 {
     switch (action.type) {

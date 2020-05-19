@@ -6,7 +6,7 @@ const GET_POSTCART_SUCCESS = "GET_POSTCART_SUCCESS";
 const GET_POSTCARTCATEGORY_SUCCESS = "GET_POSTCARTCATEGORY_SUCCESS ";
 export const actionTypes = {
   GET_POSTCART_SUCCESS,
-  GET_POSTCARTCATEGORY_SUCCESS,
+  GET_POSTCARTCATEGORY_SUCCESS
 };
 
 function getPostCartSuccess(postCart) {
@@ -30,7 +30,7 @@ export function getPostCart() {
 }
 
 //categorye göre post listeleme işlemi
-export function getPostCartCategory(categoryId) {console.log("buraya geldi")
+export function getPostCartCategory(categoryId) {
   return function (dispatch) {
     GetWithUrl(API + "postCategory/getbycategoryId/?categoryId="+categoryId)
       .then((response) => {
@@ -40,4 +40,6 @@ export function getPostCartCategory(categoryId) {console.log("buraya geldi")
       .catch((error) => console.log("categorye ait postlar gelince hata oluştu .\n", error));
   };
 }
+ 
+
  

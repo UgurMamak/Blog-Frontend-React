@@ -1,5 +1,4 @@
 import { actionTypes } from "./PostCartActions";
-
 const initialState = {
   cartList: [],
 };

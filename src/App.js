@@ -20,6 +20,8 @@ import UserRegisterContainer from "./containers/user-register-container";
 import ContactContainer from "./containers/contact-container";
 import AdminPanelContainer from "./containers/admin-panel-container";
 
+import PostCategoryContainer from "./containers/post-category-container/PostCategoryContainer"
+
 export default class App extends Component {
   render() {
     return (
@@ -28,8 +30,17 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="home" />} />
           <Route exact path="/home" component={HomeContainer} />
-          <Route exact path="/category/:categoryId" component={HomeContainer} />
-          <Route exact path="/PostDetail/:postId"  component={PostDetailContainer} />         
+          
+          
+          
+          <Route exact path="/PostDetail/:postId"  component={PostDetailContainer} />     
+
+          <Route exact path="/category/:categoryId" component={PostCategoryContainer} />
+                    
+          <Route exact path="/category/PostDetail/:postId" component={PostDetailContainer} />
+         
+          
+
           {/*<Route               
                 path="/postDetay:postId"
                 render={props => { 

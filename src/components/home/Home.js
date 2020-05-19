@@ -22,10 +22,11 @@ class Home extends Component {
         {/*Title start*/}
         <div className="col-md-12">
           <div className="section-title">
-            <h2 className="title">SON POSTLAR</h2>
+            <h2 className="title">EN SON EKLENEN POSTLAR</h2>
           </div>
         </div>
         {/*Title end*/}
+
         <PostCard postList={this.props.cartReducer.cartList} />
       </div>
     );
