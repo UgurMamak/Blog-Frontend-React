@@ -112,7 +112,7 @@ export  function saveUserImage(user) {
 
 export function getImageSuccess(img) {
   return { type: actionTypes.GET_IMAGE, payload: img };
-}
+} 
 
 export function postImageSuccess(img) {
   return { type: actionTypes.POST_IMAGE, payload: img };

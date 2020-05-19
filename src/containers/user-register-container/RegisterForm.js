@@ -91,7 +91,7 @@ class RegisterForm extends Component {
         {console.log(this.props.user.message)}
         {console.log(this.props.user.registerStatus)}
         <div className="container-login100">
-          <div className="wrap-login100">
+          <div className="wrap-login100">{/* beyaz yer*/} 
             <ImageChoose
               handleFileUpload={this.handleFileUpload}
               imageFile={this.state.imageFile}

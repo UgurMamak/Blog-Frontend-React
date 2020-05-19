@@ -37,7 +37,7 @@ export default function LoginUserReducer(state = initialState, action) {
             successfulLogin: 0,
           },
         };
-      }
+      } 
     
     case actionTypes.RESET_LOGIN:
       return {

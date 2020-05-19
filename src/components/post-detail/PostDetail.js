@@ -10,7 +10,7 @@ import * as postActions from "../../redux/post/postActions";
 import NotFount from "../../components/common/Error404";
 import ListComment from "../../components/comment/list-comment/ListComment";
 import AddComment from "../comment/add-comment/AddComment";
-
+import LikePost from "../../components/likePost/"
 class PostDetail extends Component {
   componentDidMount() {
     this.props.actions.getPost(this.props.postId);
@@ -31,23 +31,21 @@ class PostDetail extends Component {
   renderPostDetail() {
     return (
       <div>
+        
         <SharePost />
         {/* post content */}
         {this.props.postReducer.postDetail.map((pd) => (
           <div className="section-row" key={pd.postId}>
+            <LikePost postId={pd.postId}/>
             <h3>{pd.title}</h3>
             <img src={API + "postImage/" + pd.imageName} alt="" />
             <p>{pd.content}</p>
 
-
             <ListComment commentList={pd.comments} />
-
+            <AddComment postId={pd.postId} />
           </div>
         ))}
-        {/* /post content */}       
-
-        
-        <AddComment />
+        {/* /post content */}
       </div>
     );
   }

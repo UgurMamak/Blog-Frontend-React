@@ -32,14 +32,14 @@ export default class PostCard extends Component {
                   <li>{ps.publishDate}</li>
 
                   <li>
-                    <span className="fa fa-comments"></span> 3
+                    <span className="fa fa-comments"></span> {ps.commentNumber}
                   </li>
                   <li>
-                    <span className="fa fa-heart"></span> 3
+                    <span className="fa fa-heart"></span> {ps.likeNumber}
                   </li>
                   <li>
                     <span className="fa fa-eye"></span> 3
-                  </li>
+                  </li> 
                 </ul>
               </div>
             </div>

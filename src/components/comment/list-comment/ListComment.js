@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { API } from "../../../helpers/api-config";
 const defaultImage = API + "userImage/profileImage.jpg";
 export default class ListComment extends Component {
-
   commentList() {
     return (
       <div>

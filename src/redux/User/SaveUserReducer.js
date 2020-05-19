@@ -11,7 +11,7 @@ const initialState = {
     registerResponse: {},
   },
 };
-
+ 
 export default function SaveUserReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.UPDATE_USER_SUCCESS:
@@ -53,7 +53,7 @@ export default function SaveUserReducer(state = initialState, action) {
         },
       };
 
-
+ 
       case actionTypes.GET_IMAGE: console.log(action.payload);
       return action.payload
 
