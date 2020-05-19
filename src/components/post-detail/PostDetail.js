@@ -1,77 +1,80 @@
 import React, { Component } from "react";
-import ListComment from "../comment/list-comment/ListComment";
-import AddComment from "../comment/add-comment/AddComment";
 import SharePost from "./SharePost";
-export default class PostDetail extends Component {
+import { API } from "../../helpers/api-config";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+//actions
+import * as postActions from "../../redux/post/postActions";
+
+//component
+import NotFount from "../../components/common/Error404";
+import ListComment from "../../components/comment/list-comment/ListComment";
+import AddComment from "../comment/add-comment/AddComment";
+
+class PostDetail extends Component {
+  componentDidMount() {
+    this.props.actions.getPost(this.props.postId);
+  }
+
   state = {
-    metin: {
-      title: "Başlık deneme",
-      content1:
-        " Lorem ipsum dolor sit amet, mea ad idque detraxit, cu soleat graecis" +
-        "invenire eam. Vidisse suscipit liberavisse has ex, vocibus patrioque" +
-        "vim et, sed ex tation reprehendunt. Mollis volumus no vix, ut qui" +
-        "clita habemus, ipsum senserit est et. Ut has soluta epicurei" +
-        "mediocrem, nibh nostrum his cu, sea clita electram reformidans an.",     
-    },
-    tags:
-    [
-      {tg:"Social"},
-      {tg:"Lifestyle"},
-      {tg:"Fashion"},
-      {tg:"Health"},
-      {tg:"Denme"}
-    ]
-
-
-
+    tags: [
+      { id: 1, tg: "Social" },
+      { id: 2, tg: "Lifestyle" },
+      { id: 3, tg: "Fashion" },
+      { id: 4, tg: "Health" },
+      { id: 5, tg: "Denme" },
+    ],
   };
+  renderEmpty() {
+    return <NotFount />;
+  }
+  renderPostDetail() {
+    return (
+      <div>
+        <SharePost />
+        {/* post content */}
+        {this.props.postReducer.postDetail.map((pd) => (
+          <div className="section-row" key={pd.postId}>
+            <h3>{pd.title}</h3>
+            <img src={API + "postImage/" + pd.imageName} alt="" />
+            <p>{pd.content}</p>
+
+
+            <ListComment commentList={pd.comments} />
+
+          </div>
+        ))}
+        {/* /post content */}       
+
+        
+        <AddComment />
+      </div>
+    );
+  }
 
   render() {
     return (
       <div>
-        <SharePost/>
-        {/* post content */}
-        <div className="section-row">
-          <h3>{this.state.metin.title}</h3>
-          <p>{this.state.metin.content1}</p>
-          <p>{this.state.metin.content1}</p>
-          <figure className="pull-right">
-            <img src="callie/img/media-1.jpg" alt="" />
-            <figcaption>
-              Lorem ipsum dolor sit amet, mea ad idque detraxit,
-            </figcaption>
-          </figure>
-          <p>{this.state.metin.content1}</p>
-          <p>{this.state.metin.content1}</p>
-          <blockquote className="blockquote">
-            <p>{this.state.metin.content1}</p>
-            <footer className="blockquote-footer">John Doe</footer>
-          </blockquote>
-
-          <figure>
-            <img src="callie/img/media-2.jpg" alt="" />
-          </figure>
-          <h3>Sit nulla quidam et, eam ea legimus deserunt neglegentur.</h3>
-          <p>{this.state.metin.content3}</p>
-        </div>
-        {/* /post content */}
-
-
-        {/* post tags */}
-        <div className="section-row">
-          <div className="post-tags">
-            <ul>
-              <li>TAGS:</li>
-              {this.state.tags.map((t)=>(
-                <li><a href="/">{t.tg}</a></li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        {/* /post tags */}
-
-        
+        {this.props.postReducer.postDetailStatus.successfulPost === 1
+          ? this.renderPostDetail()
+          : this.renderEmpty()}
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    postReducer: state.PostListReducer,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      getPost: bindActionCreators(postActions.getPostDetail, dispatch),
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

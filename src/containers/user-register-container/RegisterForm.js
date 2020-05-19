@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import {Redirect, Link } from "react-router-dom";
-
+import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 //actions
 import * as userActions from "../../redux/User/UserActions";
+//components
+import ImageChoose from "./ImageChoose";
 
 class RegisterForm extends Component {
   state = {
@@ -14,19 +14,39 @@ class RegisterForm extends Component {
     email: "",
     password1: "",
     password2: "",
-    fillAreasError: false, //textlerin boş dolu olduğunu kontrol etmek için
-    passwordNotEqualError: false,// parola1 ve parola2 eşit olması durumlarını kontrol etmek için
+
+    imageFile: null,
+    imagePath: null,
+
+    control: false,
+    controlMessage: null,
+  };
+
+  componentDidMount() {
+    this.setState({ fillAreasError: false });
+  }
+
+  //resim seçerse resim bilgilerini çekiyoruz.
+  handleFileUpload = async (event) => {
+    this.setState({ imageFile: event.target.files[0] });
+    this.setState({ imagePath: URL.createObjectURL(event.target.files[0]) });
   };
 
   //datalarımızı alıyoruz. her inputa verilecek inputların içindeki datalar çekilir.
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    this.setState({
+      fillAreasError: false,
+      control: false,
+      controlMessage: null,
+    });
+    this.props.actions.resetRegisterState();
     // name değeri categoryId ise onu int e çevir değilse olduğu gibi al demek (hooksta kullanılır.)
     //[name]: name === "categoryId" ? parseInt(value, 10) : value
   };
 
-  handleSave = (event) => {
+  handleSave = async (event) => {
     if (
       this.state.email !== "" &&
       (this.state.firstName !== "") &
@@ -35,56 +55,72 @@ class RegisterForm extends Component {
         (this.state.password2 !== "")
     ) {
       if (this.state.password1 === this.state.password2) {
-        this.props.actions.saveUser({
-          email: this.state.email,
-          password: this.state.password1,
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-        });
+        const data = new FormData();
+        data.append("email", this.state.email);
+        data.append("password", this.state.password1);
+        data.append("firstName", this.state.firstName);
+        data.append("lastName", this.state.lastName);
+        data.append("image", this.state.imageFile);
+        data.append("role", "user");
+        this.props.actions.saveUser(data);
       } else {
-        //alert("Passwords are not equal");
-        this.setState({ passwordNotEqualError: true });
+        this.setState({
+          control: true,
+          controlMessage: "!!!Girilen parola değerleri eşleşmedi.!!!",
+        });
       }
     } else {
-      //alert("Please fill the areas.");
-      this.setState({ fillAreasError: true });
+      this.setState({
+        control: true,
+        controlMessage: "!!!Değerleri boş bırakmayınız.!!!",
+      });
     }
-    event.preventDefault(); //sayfanın refresh olması engellenir. (url'de yazılar gözükmez.)
+    event.preventDefault();
   };
 
   render() {
-
-    if(this.props.user.registerStatus.registerInProgress === 0 && this.props.user.registerStatus.successfulRegister === 1) 
-    {
+    if (
+      this.props.user.registerStatus.registerInProgress === 0 &&
+      this.props.user.registerStatus.successfulRegister === 1
+    ) {
       //this.props.resetRegisterState();
-     // return (<Redirect to='/login'/>)
+      // return (<Redirect to='/login'/>)
     }
-
     return (
       <div className="limiter">
-       {console.log(this.props.user.message)}
-        
+        {console.log(this.props.user.message)}
+        {console.log(this.props.user.registerStatus)}
         <div className="container-login100">
-          <div>
-            {" "}
-            {/*<div className="wrap-login100"></div>*/}
-            {/*
-                <div className="login100-pic" data-tilt>
-                  <img src="login_v1/images/img-01.png" alt="IMG" />
-                </div>
-              */}
-            <form className="login100-form validate-form">
+          <div className="wrap-login100">
+            <ImageChoose
+              handleFileUpload={this.handleFileUpload}
+              imageFile={this.state.imageFile}
+              imagePath={this.state.imagePath}
+            />
+            <div className="login100-form validate-form">
               <span className="login100-form-title">
                 <b>Üye Ol</b>
               </span>
+              {/*************Mesaj******************/}
+              {this.state.control === true ? (
+                <div
+                  data-validate={this.state.controlMessage}
+                  className="wrap-input100 alert-validate"
+                />
+              ) : (
+                <div className="wrap-input100" />
+              )}
 
-              <div
-                className="wrap-input100"
-                id="uyarı"
-                data-validate="!!!GİRİLEN DEĞERLERİ KONTROL EDİNİZ!!!"
-              />
+              {this.props.user.registerStatus.successfulRegister === 0 ? (
+                <div
+                  data-validate={this.props.user.message}
+                  className="wrap-input100 alert-validate"
+                />
+              ) : (
+                <div className="wrap-input100" />
+              )}
               <br />
-
+              {/*************Mesaj End******************/}
               <div
                 className="wrap-input100 validate-input"
                 id="emailO"
@@ -103,7 +139,6 @@ class RegisterForm extends Component {
                   <i className="fa fa-envelope" aria-hidden="true" />
                 </span>
               </div>
-
               <div
                 className="wrap-input100 validate-input"
                 id="passwordO"
@@ -127,7 +162,6 @@ class RegisterForm extends Component {
                   <i className="fa fa-lock" aria-hidden="true" />
                 </span>
               </div>
-
               <div
                 className="wrap-input100 validate-input"
                 data-validate="Password is required"
@@ -150,7 +184,6 @@ class RegisterForm extends Component {
                   <i className="fa fa-lock" aria-hidden="true" />
                 </span>
               </div>
-
               <div
                 className="wrap-input100 validate-input"
                 data-validate="Password is required"
@@ -167,7 +200,6 @@ class RegisterForm extends Component {
                   <i className="fa fa-font" aria-hidden="true" />
                 </span>
               </div>
-
               <div
                 className="wrap-input100 validate-input"
                 data-validate="Password is required"
@@ -184,7 +216,6 @@ class RegisterForm extends Component {
                   <i className="fa fa-font" aria-hidden="true" />
                 </span>
               </div>
-
               <div className="container-login100-form-btn">
                 <button
                   className="login100-form-btn"
@@ -194,7 +225,6 @@ class RegisterForm extends Component {
                   Üye Ol
                 </button>
               </div>
-
               <div className="text-center p-t-12">
                 <Link className="txt2" to={"/login"}>
                   Hesabın varsa
@@ -204,7 +234,7 @@ class RegisterForm extends Component {
                   />
                 </Link>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -224,8 +254,10 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       saveUser: bindActionCreators(userActions.saveUser, dispatch),
-      resetRegisterState: bindActionCreators(userActions.resetRegister, dispatch),
-      
+      resetRegisterState: bindActionCreators(
+        userActions.resetRegister,
+        dispatch
+      ),
     },
   };
 }

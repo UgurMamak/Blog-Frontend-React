@@ -49,6 +49,7 @@ export default function SaveUserReducer(state = initialState, action) {
           ...state.registerStatus,
           registerInProgress: -1,
           successfulRegister: -1,
+          registerResponse: {},
         },
       };
 

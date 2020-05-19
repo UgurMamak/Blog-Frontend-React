@@ -1,19 +1,15 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 //actions
-import * as categoryActions from "../../../redux/category/CategoryActions"
+import * as categoryActions from "../../../redux/category/CategoryActions";
 
 class VerticalNavbar extends Component {
-
-  componentDidMount()
-  {
+  componentDidMount() {
     this.props.actions.getCategories();
   }
-
-
 
   state = {
     home: [
@@ -22,7 +18,7 @@ class VerticalNavbar extends Component {
       { id: "3", cat: "Author page" },
       { id: "4", cat: "About Us" },
       { id: "5", cat: "Contacts" },
-      { id: "6", cat: "Regular" }
+      { id: "6", cat: "Regular" },
     ],
   };
 
@@ -36,24 +32,22 @@ class VerticalNavbar extends Component {
           <li className="has-dropdown">
             <a>Kategoriler</a>
             <ul className="dropdown">
-              {this.props.categories.map((category)=>(
-                   <li key={category.id}>
-                   <a href="category.html">{category.categoryName}</a>
-                 </li>
+              {this.props.categories.map((category) => (
+                <li key={category.id}>
+                  <a href="category.html">{category.categoryName}</a>
+                </li>
               ))}
-              
             </ul>
           </li>
           <li>
             <a href="contact.html">İletişim</a>
           </li>
           <li className="has-dropdown">
-            {/*<a>Giriş Yap</a>*/}
-			<Link to="/login">Giriş Yap</Link>
+            <Link to="/login">Giriş Yap</Link>
             <ul className="dropdown">
-                <li >
-                  <a href="category.html">Çıkış yap</a>
-                </li>
+              <li>
+                <a href="category.html">Çıkış yap</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -65,20 +59,21 @@ class VerticalNavbar extends Component {
   }
 }
 
-function mapStateToProps(state)
-{
-  return{
-        categories:state.CategoryListReducer
-  }
+function mapStateToProps(state) {
+  return {
+    categories: state.CategoryListReducer,
+  };
 }
 
-function mapDispatchToProps(dispatch)
-{
-  return{
-    actions:{
-      getCategories:bindActionCreators(categoryActions.getCategories,dispatch)
-    }
-  }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      getCategories: bindActionCreators(
+        categoryActions.getCategories,
+        dispatch
+      ),
+    },
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VerticalNavbar);

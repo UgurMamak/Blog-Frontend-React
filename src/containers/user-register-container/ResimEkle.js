@@ -20,9 +20,7 @@ export default class ResimEkle extends Component {
       {
         method: 'POST',
         body: data
-      }
-      
-    )
+      })
  //   event.preventDefault();
 
     }

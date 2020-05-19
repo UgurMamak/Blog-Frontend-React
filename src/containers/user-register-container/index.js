@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 //components
-import RegisterForm from "./RegisterForm"
-import ResimEkle from "./ResimEkle"
-import ResimGetir from "./ResimGetir"
+import RegisterForm from "./RegisterForm";
+
+//import ResimEkle from "./ResimEkle"//+++
+//import ResimGetir from "./ResimGetir"
 
 export default class UserRegisterContainer extends Component {
-    render() {
-        return (
-            <div>               
-               <ResimEkle/>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <RegisterForm />
+      </div>
+    );
+  }
 }

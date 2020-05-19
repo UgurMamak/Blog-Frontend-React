@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 //actions
 import * as userActions from "../../redux/User/UserActions";
-
 class LoginForm extends Component {
-  
   state = {
     email: "",
     password: "",
@@ -53,6 +50,7 @@ class LoginForm extends Component {
         <div className="container-login100">
           <div>
             {/*<div className="wrap-login100"></div>*/}
+
             {/*
             <div className="login100-pic" data-tilt>
               <img src="login_v1/images/img-01.png" alt="IMG" />
@@ -80,7 +78,7 @@ class LoginForm extends Component {
               ) : (
                 <div className="wrap-input100" />
               )}
-            {/******************MESSAGE***********************/}
+              {/******************MESSAGE***********************/}
               <br />
               <div
                 className="wrap-input100 validate-input"

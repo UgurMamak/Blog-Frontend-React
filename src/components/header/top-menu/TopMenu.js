@@ -12,7 +12,6 @@ export default class TopMenu extends Component {
           <NavSocial />
           <NavLogo />
           <NavBtn />
-          
         </div>
       </div>
     );

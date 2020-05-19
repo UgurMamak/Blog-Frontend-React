@@ -64,18 +64,14 @@ export function resetLogin() {
 
 //REGISTER
 
-export function saveUser(user) {
-  return (dispatch) => {
-    PostWithUrlBody(API + "auth/register", user)
+export  function saveUser(user) {console.log("actions",user)
+  return  (dispatch) => {
+    PostWithUrlBodyImage(API + "auth/register", user)
       .then((response) => {
         if (response.status === 200) {
           return response.json();
-          //dispatch(createUserSuccess(response));
         } else {
           return response.text();
-          /*response.json().then((data) => {
-            dispatch(createUserSuccess(data.message));
-          });*/
         }
       })
       .then((responseJson) => {
@@ -103,7 +99,7 @@ export const LoginUser = (user) => {
       })
       .catch((error) => console.log("Error when fetch register\n", error));
   };
-};
+}; 
 
 //IMAGE SAVE
 export  function saveUserImage(user) {
