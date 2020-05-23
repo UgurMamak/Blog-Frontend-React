@@ -7,13 +7,12 @@ export default class PostCard extends Component {
     return (
       <div>
         {this.props.postList.map((ps) => (
-          <div className="col-md-6" key={ps.postId}>
-            <div className="post">
-              <Link className="post-img" to={"PostDetail/"+ps.postId}> 
-                <img src={ps.thumbImage} alt="" />
+          <div className="col-md-6" key={ps.postId} >
+            <div className="post" >
+              <Link className="post-img" to={"PostDetail/" + ps.postId}>
                 <img src={API + "postImage/" + ps.imageName} alt="" />
-              </Link>
-              <div className="post-body"> 
+              </Link> 
+              <div className="post-body">
                 <div className="post-category">
                   {ps.postCategoryListDtos.map((pc) => (
                     <a href="category.html" key={pc.categoryId}>
@@ -23,7 +22,7 @@ export default class PostCard extends Component {
                 </div>
 
                 <h3 className="post-title">
-                  <a href={"PostDetail/"+ps.postId}>{ps.title}</a>
+                  <a href={"PostDetail/" + ps.postId}>{ps.title}</a>
                 </h3>
                 <ul className="post-meta">
                   <li>
@@ -39,7 +38,7 @@ export default class PostCard extends Component {
                   </li>
                   <li>
                     <span className="fa fa-eye"></span> 3
-                  </li> 
+                  </li>
                 </ul>
               </div>
             </div>

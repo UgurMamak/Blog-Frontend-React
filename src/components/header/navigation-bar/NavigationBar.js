@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 import * as categoryActions from "../../../redux/category/CategoryActions";
 import * as postCartActions from "../../../redux/cart/PostCartActions";
 
+
+
 class NavigationBar extends Component {
   componentDidMount() {
     this.props.actions.getCategories();
@@ -18,6 +20,11 @@ class NavigationBar extends Component {
     this.props.actions.getCart(category.id); //seçilen kategoriye göre postcard listeleme işlemi
     this.props.actions.changeCategory(category.id)
   }
+
+
+
+
+
   render() {
     return (
       <div id="nav-bottom">
@@ -58,13 +65,12 @@ class NavigationBar extends Component {
                 <div className="dropdown-body">
                   <ul className="dropdown-list">
                     <li>
-                      <a href="category.html">Çıkış Yap</a>
+                      
                     </li>
                   </ul>
                 </div>
               </div>
             </li>
-
             <li>
               <Link to="/register">Üye Ol</Link>
             </li>

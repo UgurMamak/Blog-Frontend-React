@@ -1,7 +1,10 @@
 import fetch from "cross-fetch";
 
-export const PostWithUrlBody = (url, bodyIn) => {
-    var request = fetch(url, {
+import setAuthToken from "./setAuthToken"
+
+
+export const PostWithUrlBody = async (url, bodyIn) => {
+    var request =await fetch(url, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, cors, *same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -17,14 +20,25 @@ export const PostWithUrlBody = (url, bodyIn) => {
     return request;
   };
 
+
+
+
   
-  export const GetWithUrl = url => {
-    var request = fetch(url, {
+  var bearer ="Bearer "+localStorage.getItem("token");
+    
+  
+
+
+ 
+  export const GetWithUrl = async url => {
+    var request =await fetch(url, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, cors, *same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "same-origin", // include, *same-origin, omit
-      headers: {
+    
+      headers:{
+        'Authorization':bearer,
         "Content-Type": "application/json"
         // "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -38,9 +52,8 @@ export const PostWithUrlBody = (url, bodyIn) => {
 
   export const PostWithUrlBodyImage = (url, bodyIn) => {
     var request = fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-     
+      method: "POST", // *GET, POST, PUT, DELETE, etc.  
       body: bodyIn // body data type must match "Content-Type" header
     });
-    return request;
+    return request; 
   };

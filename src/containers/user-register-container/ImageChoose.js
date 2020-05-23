@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
-
+//USER eklerken kullanılan component
 export default class ImageChoose extends Component {
     render() {
         return (
            
-                <div className="login100-pic" data-tilt>                     
-                  <img
-                    style={{ width: "250px", height: "250px" }}
-                    accept="image/x-png,image/gif,image/jpeg"
-                    src={this.props.imagePath}
-                  />
-                  <input
-                      type="file"
-                      className="form-control"
-                      aria-describedby="basic-addon1"
-                      accept="image/png, image/jpeg"
-                      onChange={this.props.handleFileUpload}
-                    />
-                    </div>
+               <div>
+                 <img
+                  src={this.props.imagePath
+                }
+                  style={{ width: "200px", height: "200px" }}
+                  className="avatar img-circle img-thumbnail"
+                  alt="avatar"
+                />
+                <br/>
+                <input
+                  type="file"
+                  onChange={this.props.handleFileUpload}
+                  className="text-center center-block file-upload"
+                />
+                <br />
+               </div>
         )
     }
 }

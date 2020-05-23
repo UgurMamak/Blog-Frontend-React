@@ -3,13 +3,14 @@ import { actionTypes } from "./UserActions";
 
 const initialState = {
   jsonToken: null,
+  userId:null,
   loginStatus: {
     loginInProgress: -1,//backend ile bağlantının oup olmadığını takip etmke için
     successfulLogin: -1,//login başarılı başarısız durumunu tespit etmek içn
     loginResponse: {},
   },
 };
-
+ 
 export default function LoginUserReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.GET_USER_LOGIN_SUCCESS:
@@ -17,14 +18,16 @@ export default function LoginUserReducer(state = initialState, action) {
     case actionTypes.POST_USER_LOGIN_SUCCESS:
       if (action.payload.token) {
         //token döndüyse giriş işlemi doğrudur demek.
-        return {
+        return {  
           ...state,
+          
           jsonToken: action.payload, //token bilgisi json formatında
+          userId:action.payload.userId,
           loginStatus: {
             ...state.loginStatus,
             loginInProgress: 0,
             successfulLogin: 1,
-          },
+          }, 
         };
       } else {
         return {

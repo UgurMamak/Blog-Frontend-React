@@ -23,7 +23,7 @@ class LoginForm extends Component {
     this.props.actions.resetLoginState(); //Şimdilik burda yanlış şifre girdiğinde sıfırlaması için
   };
 
-  handleSave = (event) => {
+  handleSave =  async (event) => {
     if (this.state.email !== "" && this.state.password !== "") {
       this.props.actions.loginUser({
         email: this.state.email,
@@ -35,16 +35,7 @@ class LoginForm extends Component {
     event.preventDefault();
   };
 
-  render() {
-    if (
-      this.props.user.loginStatus.loginInProgress === 0 &&
-      this.props.user.loginStatus.successfulLogin === 1
-    ) {
-      localStorage.setItem("Token", this.props.user.jsonToken.token);
-      console.log(this.props.user.jsonToken.token);
-      /*return <Redirect to="/home" />;*/ // kullanıcı adı ve şifre doğru ie home sayfasına yönlendirilir.
-    }
-    console.log(this.props.user.loginStatus);
+  loginForm() {
     return (
       <div className="limiter">
         <div className="container-login100">
@@ -56,6 +47,7 @@ class LoginForm extends Component {
               <img src="login_v1/images/img-01.png" alt="IMG" />
             </div>
           */}
+
             <form className="login100-form validate-form">
               <span className="login100-form-title">
                 <b>Giriş Yap</b>
@@ -143,6 +135,32 @@ class LoginForm extends Component {
             </form>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  render() {
+    if (
+      this.props.user.loginStatus.loginInProgress === 0 &&
+      this.props.user.loginStatus.successfulLogin === 1
+    ) {
+      //localStorage.setItem("token", this.props.user.jsonToken.token);
+      //localStorage.setItem("userId", this.props.user.userId);
+      //console.log(this.props.user.jsonToken.token);
+
+      return <Redirect to="/profile" />; // kullanıcı adı ve şifre doğru ie home sayfasına yönlendirilir.
+    }
+    console.log(this.props.user.loginStatus);
+    return (
+      <div>
+        {
+          this.loginForm() /*
+         //token değeri varsa kullanıcı daha önce giriş yapmış demek 
+         localStorage.getItem("token")===null 
+         ?this.loginForm()
+         :<Redirect to="/home" />
+         */
+        }
       </div>
     );
   }

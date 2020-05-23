@@ -7,6 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
+
 //components
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -19,8 +20,10 @@ import UserLoginContainer from "./containers/user-login-container";
 import UserRegisterContainer from "./containers/user-register-container";
 import ContactContainer from "./containers/contact-container";
 import AdminPanelContainer from "./containers/admin-panel-container";
-
+import UserProfileContainer from "./containers/user-profile-container"
 import PostCategoryContainer from "./containers/post-category-container/PostCategoryContainer"
+
+import PostAdd from "./components/post-add/"
 
 export default class App extends Component {
   render() {
@@ -28,19 +31,12 @@ export default class App extends Component {
       <div>
         <Header />
         <Switch>
+          <Route exact path="/PostAdd" component={PostAdd}/>
           <Route exact path="/" render={() => <Redirect to="home" />} />
           <Route exact path="/home" component={HomeContainer} />
-          
-          
-          
           <Route exact path="/PostDetail/:postId"  component={PostDetailContainer} />     
-
-          <Route exact path="/category/:categoryId" component={PostCategoryContainer} />
-                    
+          <Route exact path="/category/:categoryId" component={PostCategoryContainer} />             
           <Route exact path="/category/PostDetail/:postId" component={PostDetailContainer} />
-         
-          
-
           {/*<Route               
                 path="/postDetay:postId"
                 render={props => { 
@@ -53,6 +49,7 @@ export default class App extends Component {
                 }}
               ></Route>*/}
           <Route path="/Login" component={UserLoginContainer} />
+          <Route path="/profile" component={UserProfileContainer} />
           <Route path="/Register" component={UserRegisterContainer} />
           <Route path="/contact" component={ContactContainer} />
           <Route path="/admin" component={AdminPanelContainer} />

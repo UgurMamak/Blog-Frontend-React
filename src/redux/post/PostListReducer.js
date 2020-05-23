@@ -4,9 +4,9 @@ const initialState = {
   postDetail: [],
   postDetailStatus: {
     successfulPost: -1, //login başarılı başarısız durumunu tespit etmek içn
-    loginResponse: {},
+   // loginResponse: {},
   },
-};
+}; 
 export default function PostListReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.GET_POSTDETAIL_SUCCESS:

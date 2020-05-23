@@ -3,6 +3,15 @@ import SharePost from "./SharePost";
 import { API } from "../../helpers/api-config";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2
+} from "react-html-parser";
+
+
 //actions
 import * as postActions from "../../redux/post/postActions";
 
@@ -38,8 +47,10 @@ class PostDetail extends Component {
           <div className="section-row" key={pd.postId}>
             <LikePost postId={pd.postId}/>
             <h3>{pd.title}</h3>
-            <img src={API + "postImage/" + pd.imageName} alt="" />
-            <p>{pd.content}</p>
+            <img src={API + "postImage/" + pd.imageName} alt="" />           
+            <div>
+            {ReactHtmlParser(pd.content)}
+            </div>
 
             <ListComment commentList={pd.comments} />
             <AddComment postId={pd.postId} />

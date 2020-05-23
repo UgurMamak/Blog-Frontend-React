@@ -10,8 +10,6 @@ import * as categoryActions from "../../redux/category/CategoryActions";
 import Home from "../../components/home/Home";
 import LeftContainer from "../left-container/LeftContainer";
 
-
-
 class PostCategoryContainer extends Component {
   state = {
     categoryName: "",
@@ -22,7 +20,7 @@ class PostCategoryContainer extends Component {
     this.props.actions.currentCategory(this.props.match.params.categoryId);
   }
   render() {
-    var banner=require('../../images/header-2.jpg')
+    var banner = require("../../images/header-2.jpg");
     return (
       <div>
         {/*-----SliderPost start----*/}
@@ -31,9 +29,7 @@ class PostCategoryContainer extends Component {
           <div className="page-header">
             <div
               className="page-header-bg"
-
-              style={{"backgroundImage":"url("+banner+")"}}
-
+              style={{ backgroundImage: "url(" + banner + ")" }}
               data-stellar-background-ratio="0.5"
             ></div>
             <div className="row">

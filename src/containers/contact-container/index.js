@@ -1,13 +1,6 @@
-import React, { Component } from 'react'
-import ImageEditor from "../user-register-container/ImageEditor"
-import ImageSave from "../user-register-container/ImageSave"
+import React, { Component } from "react";
 export default class ContactContainer extends Component {
-    render() {
-        return (
-            <div>
-               <ImageSave/>
-               
-            </div>
-        )
-    }
+  render() {
+    return <div>CONTACT PAGE</div>;
+  }
 }

@@ -8,9 +8,19 @@ import { BrowserRouter } from "react-router-dom";
 //import "./helpers/callie/css/bootstrap.min.css"
 //import "./helpers/callie/css/style.css"
 
-
 import { Provider } from "react-redux";
 import configureStore from "./redux/configureStore";
+
+/*
+import setAuthToken from "./helpers/setAuthToken";
+const jwtToken=localStorage.getItem("token");
+if(jwtToken)
+{setAuthToken(jwtToken);}*/
+
+
+
+
+
 const store = configureStore();
 
 ReactDOM.render(

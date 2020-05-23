@@ -8,7 +8,7 @@ export default class HomeContainer extends Component {
   render() {
     return (
       <div>
-         {/*-----SliderPost start----*/}
+        {/*-----SliderPost start----*/}
         <div className="section">
           <div className="container">
             <SliderPost />
@@ -22,9 +22,9 @@ export default class HomeContainer extends Component {
               {/*-------------------------------START---------------*/}
 
               <div className="col-md-8">
-                <Home />                              
+                <Home />
               </div>
-              
+
               <div className="col-md-4">
                 <LeftContainer />
               </div>
