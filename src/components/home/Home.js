@@ -9,7 +9,7 @@ import PostCard from "../post-card/PostCard";
 
 class Home extends Component {
   //başlangıçta cartlrın listelenmesi için action çağrılır.
-  componentDidMount() {
+  componentDidMount() { 
     this.props.actions.getCart();
   }
   constructor(props) {

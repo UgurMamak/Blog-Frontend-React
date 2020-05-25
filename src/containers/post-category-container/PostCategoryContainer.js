@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch) {
     actions: {
       getCart: bindActionCreators(
         postCartActions.getPostCartCategory,
-        dispatch
+        dispatch 
       ),
       currentCategory: bindActionCreators(
         categoryActions.changeCategory,

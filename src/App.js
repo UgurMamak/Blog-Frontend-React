@@ -12,6 +12,7 @@ import {
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Error404 from "./components/common/Error404";
+import PrivateRoute from './components/common/PrivateRoute';
 
 //containers
 import HomeContainer from "./containers/home-container/HomeContainer";
@@ -22,6 +23,9 @@ import ContactContainer from "./containers/contact-container";
 import AdminPanelContainer from "./containers/admin-panel-container";
 import UserProfileContainer from "./containers/user-profile-container"
 import PostCategoryContainer from "./containers/post-category-container/PostCategoryContainer"
+
+import AdminRegister from "./containers/admin-panel-container/AdminRegisterForm"
+import UserPostCart from "./containers/admin-panel-container/UserPostCard"
 
 import PostAdd from "./components/post-add/"
 
@@ -48,8 +52,11 @@ export default class App extends Component {
                   );
                 }}
               ></Route>*/}
-          <Route path="/Login" component={UserLoginContainer} />
-          <Route path="/profile" component={UserProfileContainer} />
+          <Route path="/Login" component={UserLoginContainer} />     
+          {/*<PrivateRoute path="/profile" component={UserProfileContainer} />*/}
+          <Route path="/AdminRegister" component={AdminRegister} />
+          <Route path="/UserPost" component={UserPostCart} />
+          <Route path="/profile" component={UserProfileContainer} /> 
           <Route path="/Register" component={UserRegisterContainer} />
           <Route path="/contact" component={ContactContainer} />
           <Route path="/admin" component={AdminPanelContainer} />

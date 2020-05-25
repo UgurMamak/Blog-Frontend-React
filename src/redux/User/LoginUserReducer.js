@@ -52,6 +52,20 @@ export default function LoginUserReducer(state = initialState, action) {
         },
       };
       
+      //Düzenlenmedi.
+      case actionTypes.FAIL_LOGIN:
+        console.log("Reducera gelen mesaj",action.payload)
+        return {
+          ...state,
+          jsonToken: null,
+          message: action.payload, //işlemind neden başarılı oladığını döner.(hatalı giriş şifre yanlış gib)
+          loginStatus: {
+            ...state.loginStatus,
+            loginInProgress: 1,
+            successfulLogin: 0,
+          },
+        };
+
 
     default:
       return state;

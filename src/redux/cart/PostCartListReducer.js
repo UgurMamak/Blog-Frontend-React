@@ -15,6 +15,11 @@ export default function PostCartListReducer(state = initialState, action) {
         ...state,
         cartList: action.payload,
       };
+      case actionTypes.GET_USER_POSTCART_SUCCESS:
+      return {
+        ...state,
+        cartList: action.payload,
+      };
     default:
       return state;
   }

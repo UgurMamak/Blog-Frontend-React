@@ -1,12 +1,13 @@
 import { API } from "../../helpers/api-config";
-import { GetWithUrl } from "../../helpers/url-helper";
-
+import axios from "axios";
 /* Action Types */
 const GET_POSTCART_SUCCESS = "GET_POSTCART_SUCCESS";
 const GET_POSTCARTCATEGORY_SUCCESS = "GET_POSTCARTCATEGORY_SUCCESS ";
+const GET_USER_POSTCART_SUCCESS = "GET_USER_POSTCART_SUCCESS ";
 export const actionTypes = {
   GET_POSTCART_SUCCESS,
-  GET_POSTCARTCATEGORY_SUCCESS
+  GET_POSTCARTCATEGORY_SUCCESS,
+  GET_USER_POSTCART_SUCCESS 
 };
 
 function getPostCartSuccess(postCart) {
@@ -14,32 +15,45 @@ function getPostCartSuccess(postCart) {
 }
 
 function getPostCartCategorySuccess(postCart) {
-  return { type: actionTypes.GET_POSTCARTCATEGORY_SUCCESS , payload: postCart };
+  return { type: actionTypes.GET_POSTCARTCATEGORY_SUCCESS, payload: postCart };
 }
- 
-//Tüm postları çeker.
+
+function getUserPostCartSuccess(postCart) {
+  return { type: actionTypes.GET_USER_POSTCART_SUCCESS, payload: postCart };
+}
+
+//Tüm post cartlarını çeker.
 export function getPostCart() {
   return function (dispatch) {
-    GetWithUrl(API + "postCategory/getall2")
-      .then((response) => {
-        return response.json();
+    let url = API + "postCategory/getall2";
+    axios
+      .get(url)
+      .then((result) => {
+        dispatch(getPostCartSuccess(result.data));
       })
-      .then((response) => dispatch(getPostCartSuccess(response)))
-      .catch((error) => console.log("post cartları getirilemedi.\n", error));
+      .catch((error) => {
+        console.log("POST CARTLAR GELMEDİ", error);
+      });
   };
 }
 
-//categorye göre post listeleme işlemi
+//Categorye göre listeleme işlemi
 export function getPostCartCategory(categoryId) {
   return function (dispatch) {
-    GetWithUrl(API + "postCategory/getbycategoryId/?categoryId="+categoryId)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => dispatch(getPostCartCategorySuccess(response)))
-      .catch((error) => console.log("categorye ait postlar gelince hata oluştu .\n", error));
+    let url = API + "postCategory/getbycategoryId/?categoryId=" + categoryId;
+    axios.get(url).then((result) => {
+      dispatch(getPostCartCategorySuccess(result.data));
+    });
   };
 }
- 
 
- 
+
+//User a göre listeleme işlemi
+export function getUserPostCart(userId) {
+  return function (dispatch) {
+    let url = API + "postCategory/getbyuserId/?userId=" + userId;
+    axios.get(url).then((result) => {
+      dispatch(getUserPostCartSuccess(result.data));
+    });
+  };
+}

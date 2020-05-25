@@ -3,7 +3,7 @@ import { API } from "../../helpers/api-config";
 import { Link } from "react-router-dom";
 
 export default class PostCard extends Component {
-  render() { 
+  render() {  
     return (
       <div>
         {this.props.postList.map((ps) => (
@@ -36,9 +36,9 @@ export default class PostCard extends Component {
                   <li>
                     <span className="fa fa-heart"></span> {ps.likeNumber}
                   </li>
-                  <li>
+                  {/*<li>
                     <span className="fa fa-eye"></span> 3
-                  </li>
+                  </li>*/}
                 </ul>
               </div>
             </div>

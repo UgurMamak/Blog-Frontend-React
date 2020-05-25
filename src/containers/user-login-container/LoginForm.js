@@ -150,6 +150,7 @@ class LoginForm extends Component {
 
       return <Redirect to="/profile" />; // kullanıcı adı ve şifre doğru ie home sayfasına yönlendirilir.
     }
+
     console.log(this.props.user.loginStatus);
     return (
       <div>

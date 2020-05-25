@@ -14,7 +14,7 @@ export default class Header extends Component {
           <TopMenu />
           <NavigationBar />
           <VerticalNavBar />
-        </div>
+        </div> 
       </header>
     );
   }

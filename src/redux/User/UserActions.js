@@ -1,11 +1,12 @@
 import { API } from "../../helpers/api-config";
 import {
-  PostWithUrlBody,
   GetWithUrl,
   PostWithUrlBodyImage,
 } from "../../helpers/url-helper";
 
-import setAuthToken from "../../helpers/setAuthToken"
+import  setAuthorizationToken  from '../../helpers/setAuthorizationToken';
+import axios from 'axios'
+import jwt from 'jwt-decode'
 
 /* Action Types */
 //REGİSTER
@@ -17,6 +18,7 @@ const RESET_REGISTER = "RESET_REGISTER";
 
 //LOGIN
 const GET_USER_LOGIN_SUCCESS = "GET_USER_LOGIN_SUCCESS";
+const FAIL_LOGIN = "FAIL_LOGIN";
 const POST_USER_LOGIN_SUCCESS = "POST_USER_LOGIN_SUCCESS";
 const RESET_LOGIN = "RESET_LOGIN";
 
@@ -34,8 +36,9 @@ export const actionTypes = {
   GET_IMAGE,
   POST_IMAGE,
   CREATE_USER_UNSUCCESS,
+  FAIL_LOGIN
 };
-
+ 
 //------------------------REGISTER------------------------------------
 export function getUserSuccess(user) {
   return { type: actionTypes.GET_USER_SUCCESS, payload: user };
@@ -63,97 +66,102 @@ export function getUserLoginSuccess(user) {
 export function PostUserLoginSuccess(user) {
   return { type: actionTypes.POST_USER_LOGIN_SUCCESS, payload: user };
 }
-
+export function failLogin(user) {
+  return { type: actionTypes.FAIL_LOGIN, payload: user };
+}
 //Giriş bilgilerini temizlemek için
 export function resetLogin() {
   return { type: actionTypes.RESET_LOGIN };
 }
 
-//REGISTER
+//KULLANICI EKLEME İŞLEMİ
+export function saveUser(user){
+  return function (dispatch){
+    let url =API + "auth/register";
+    axios.post(url,user)
+    .then(response=>response.data)
+    .then(result=>{
+      dispatch(createUserSuccess(result))})  
+      .catch((error)=>{
+      dispatch(createUserUnSuccess(error.response.data))})
+  }}
 
-export function saveUser(user) {
-  return (dispatch) => {
-    PostWithUrlBodyImage(API + "auth/register", user)
-      /*.then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          return response.text();
-        }
-      })*/
 
-      .then((response) => {
-        if (response.status === 200) {
-          response.json().then((responseJson) => {
-            dispatch(createUserSuccess(responseJson));
-          });
-        } else {
-          response.text().then((responseJson) => {
-            dispatch(createUserUnSuccess(responseJson));
-          });
-        }
+  //---------------------LOGIN
+  /*
+export function LoginUser(user){
+  return function (dispatch){
+    let url =API + "auth/login";
+    axios.post(url,user)
+    .then(response=>response.data)
+    .then(result=>{
+      const token=result.token;
+      localStorage.setItem("token",token);
+      localStorage.setItem("userId",result.userId)
+      setAuthorizationToken(token);
+      dispatch(PostUserLoginSuccess(result))})  
+      .catch((error)=>{
+      dispatch(failLogin(error.response.data))})
+  }}
+*/
+
+  export function LoginUser(user){
+    return function (dispatch){
+      let url =API + "auth/login";
+      axios.post(url,user)
+      .then(response=>response.data)
+      .then(result=>{
+        console.log("Buradaki",result);
+        const token=result.token;
+        localStorage.setItem("token",token);
+        localStorage.setItem("userId",result.userId)
+
+        
+        setAuthorizationToken(token);
+
+        var role;
+        result.role.map(m=>{
+          if(m.name)role=m.name
+        })
+       localStorage.setItem("role",role)
+    
+      
+
+
+        dispatch(PostUserLoginSuccess(result))})        
+        .catch((error)=>{
+          if(error.response.data.status) dispatch(failLogin("BİLİNMEYEN HATA OLUŞTU"))
+          else  dispatch(failLogin(error.response.data))
       })
+    }}
 
-      .catch((error) => console.log("Error when fetch register\n", error));
-  };
-}
 
-//LOGIN
-export const LoginUser = (user) => {
-  return (dispatch) => {
-    //dispatch(initializeLogin());
-    PostWithUrlBody(API + "auth/login", user)
-      .then((response) => {
-        if (response.status === 200) {
-          response.json().then((responseJson) => {//console.log("responsejson",responseJson.userId)
-          const token=responseJson.token;
-          localStorage.setItem("token",token);
-          localStorage.setItem("userId",responseJson.userId); 
-          dispatch(PostUserLoginSuccess(responseJson));
-          });
-        } else {
-          response.text().then((responseJson) => {
-            dispatch(PostUserLoginSuccess(responseJson));
-          });
-        }
-      })
 
-      .catch((error) => console.log("Error when fetch register\n", error));
-  };
-};
+  
+    //---------------------USER BİLGİLERİ GETİRME
+  export function getUser(userId) {
+     return function (dispatch) {
+      let url =API + "user/getbyuserId/?userId="+ userId;
+      axios.get(url)
+      //.then(response=>{ console.log("data",response.statusText);})
+      .then(result=>{ dispatch(getUserSuccess(result.data))})
+      .catch((error) => console.log("USER BİLGİSİ GELRKEN HATA", error));
+     }
+   }
 
-//User bilgilerini listelemek için
-export function getUser(userId) {
- localStorage.getItem("token")===null ?console.log("boş geldi"): console.log("dolu geldi");
-  return function (dispatch) {
-    GetWithUrl(API + "user/getbyuserId/?userId=" + userId)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => dispatch(getUserSuccess(response)))
-      .catch((error) => console.log("Error when fetch categories\n", error));
-  };
-}
+//USER Bilgi Güncelleme
+export function  updateUser(user){
+  return function (dispatch){
+    let url =API + "user/update";
+    axios.post(url,user)
+    .then(response=>response.data)
+    .then(result=>{
+      dispatch(updateUserSuccess(result))})  
+      .catch((error)=>{console.log("USER GÜNCELLERKEN HATA",error)})
+  }}
 
-//update User
-export function updateUser(user) {
-  console.log(user);
-  return function (dispatch) {
-    PostWithUrlBodyImage(API + "user/update", user)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.text();
-        } else {
-          return response.text();
-        }
-      })
-      .then((responseJson) => {
-        dispatch(updateUserSuccess(responseJson));
-      })
-      .catch((error) => console.log("Error when fetch register\n", error));
-  };
-}
 
+/*
 //IMAGE SAVE
 export function saveUserImage(user) {
   return function (dispatch) {
@@ -186,3 +194,4 @@ export function getResim() {
       .catch((error) => console.log("Error when fetch categories\n", error));
   };
 }
+*/

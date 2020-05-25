@@ -1,29 +1,24 @@
 import { API } from "../../helpers/api-config";
-import { PostWithUrlBody } from "../../helpers/url-helper";
-
+import axios from "axios";
 /* Action Types */
 const CREATE_COMMENT_SUCCESS = "CREATE_COMMENT_SUCCESS";
-
 export const actionTypes = { CREATE_COMMENT_SUCCESS };
 
 export function createCommentSuccess(comment) {
-  return { type: actionTypes.CREATE_COMMENT_SUCCESS, payload:comment };
-} 
- 
+  return { type: actionTypes.CREATE_COMMENT_SUCCESS, payload: comment };
+}
+
 export function saveComment(comment) {
-  console.log("comment actiona geldi.");
-  return (dispatch) => {
-    PostWithUrlBody(API + "comment/add", comment)
-      .then((response) => {
-        if (response.status === 200) {console.log("comment actiondaki if e girdi.");
-          return response.text();
-        } else {console.log("comment actiondaki else e girdi.");
-          return response.text();
-        }
+  return function (dispatch) {
+    let url = API + "comment/add";
+    axios
+      .post(url, comment)
+      .then((response) => response.data)
+      .then((result) => {
+        dispatch(createCommentSuccess(result));
       })
-      .then((responseJson) => {
-        dispatch(createCommentSuccess(responseJson));
-      })
-      .catch((error) => console.log("Kayıt getirilirken hata oluştu.\n", error));
+      .catch((error) => {
+        console.log("COMMENT EKLEMEDE HATA");
+      });
   };
 }

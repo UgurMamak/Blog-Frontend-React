@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Container from "@material-ui/core/Container";
 //actions
 import * as userActions from "../../redux/User/UserActions";
 //components
 import ImageChoose from "./ImageChoose";
+
 
 class RegisterForm extends Component {
   state = {
@@ -13,7 +17,7 @@ class RegisterForm extends Component {
     lastName: "",
     email: "",
     password1: "",
-    password2: "",
+    password2: "", 
 
     imageFile: null,
     imagePath: null,
@@ -83,161 +87,170 @@ class RegisterForm extends Component {
       this.props.user.registerStatus.registerInProgress === 0 &&
       this.props.user.registerStatus.successfulRegister === 1
     ) {
+        console.log("comp",this.props.user);
       //this.props.resetRegisterState();
       // return (<Redirect to='/login'/>)
     }
+    
     return (
-      <div className="limiter">
-        {console.log(this.props.user.message)}
-        {console.log(this.props.user.registerStatus)}
-        <div className="container-login100">
-          <div className="wrap-login100">{/* beyaz yer*/} 
-            <ImageChoose 
-              handleFileUpload={this.handleFileUpload}
-              imageFile={this.state.imageFile}
-              imagePath={this.state.imagePath}
-            />
-            <div className="login100-form validate-form">
-              <span className="login100-form-title">
-                <b>Üye Ol</b>
-              </span>
-              {/*************Mesaj******************/}
-              {this.state.control === true ? (
-                <div
-                  data-validate={this.state.controlMessage}
-                  className="wrap-input100 alert-validate"
-                />
-              ) : (
-                <div className="wrap-input100" />
-              )}
+      <form className="container-login100">
+          {console.log("componenet:",this.props.user)}
+        <Container maxWidth="lg">
+          <Grid container spacing={3}>
+            <Grid style={{ textAlign: "center" }} item xs={4}></Grid>
 
-              {this.props.user.registerStatus.successfulRegister === 0 ? (
-                <div
-                  data-validate={this.props.user.message}
-                  className="wrap-input100 alert-validate"
-                />
-              ) : (
-                <div className="wrap-input100" />
-              )}
-              <br />
-              {/*************Mesaj End******************/}
-              <div
-                className="wrap-input100 validate-input"
-                id="emailO"
-                data-validate="Valid email is required: ex@abc.xyz"
-              >
-                <input
-                  className="input100"
-                  id="email"
-                  type="text"
-                  onChange={this.handleChange}
-                  name="email"
-                  placeholder="Email"
-                />
-                <span className="focus-input100" />
-                <span className="symbol-input100">
-                  <i className="fa fa-envelope" aria-hidden="true" />
-                </span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                id="passwordO"
-                data-validate="Password is required"
-              >
-                <input
-                  className="input100"
-                  id="password"
-                  type="password"
-                  onChange={this.handleChange}
-                  name="password1"
-                  placeholder="Password"
+            <Grid style={{ textAlign: "center" }} item xs={8}>
+              <Grid style={{ textAlign: "center" }} item xs={6}>
+                <ImageChoose
+                imagePath={this.state.imagePath===null ? require("./profileImage.jpg"):this.state.imagePath}
+                handleFileUpload={this.handleFileUpload}
                 />
 
-                <span className="symbol-input102">
-                  <i className="fa fa-eye" />
-                </span>
-
-                <span className="focus-input100" />
-                <span className="symbol-input100">
-                  <i className="fa fa-lock" aria-hidden="true" />
-                </span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Password is required"
-              >
-                <input
-                  className="input100"
-                  id="passwordAgain"
-                  type="password"
-                  onChange={this.handleChange}
-                  name="password2"
-                  placeholder="Password Again"
-                />
-
-                <span className="symbol-input102">
-                  <i className="fa fa-eye" />
-                </span>
-
-                <span className="focus-input100" />
-                <span className="symbol-input100">
-                  <i className="fa fa-lock" aria-hidden="true" />
-                </span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Password is required"
-              >
-                <input
-                  className="input100"
-                  type="text"
-                  name="firstName"
-                  onChange={this.handleChange}
-                  placeholder="Adınız..."
-                />
-                <span className="focus-input100" />
-                <span className="symbol-input100">
-                  <i className="fa fa-font" aria-hidden="true" />
-                </span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Password is required"
-              >
-                <input
-                  className="input100"
-                  type="text"
-                  name="lastName"
-                  onChange={this.handleChange}
-                  placeholder="Soyadınız..."
-                />
-                <span className="focus-input100" />
-                <span className="symbol-input100">
-                  <i className="fa fa-font" aria-hidden="true" />
-                </span>
-              </div>
-              <div className="container-login100-form-btn">
-                <button
-                  className="login100-form-btn"
-                  onClick={this.handleSave}
-                  type="submit"
-                >
-                  Üye Ol
-                </button>
-              </div>
-              <div className="text-center p-t-12">
-                <Link className="txt2" to={"/login"}>
-                  Hesabın varsa
-                  <i
-                    className="fa fa-long-arrow-right m-l-5"
-                    aria-hidden="true"
+                {/*************Mesaj******************/}
+                {this.state.control === true ? (
+                  <div
+                    data-validate={this.state.controlMessage}
+                    className="wrap-input100 alert-validate"
                   />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                ) : (
+                  <div className="wrap-input100" />
+                )}
+
+                {this.props.user.registerStatus.successfulRegister === 0 ? (
+                  <div
+                    data-validate={this.props.user.message}
+                    className="wrap-input100 alert-validate"
+                  />
+                ) : (
+                  <div className="wrap-input100" />
+                )}
+                <br />
+                {/*************Mesaj End******************/}
+
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Password is required"
+                >
+                  <input
+                    className="input100"
+                    type="text"
+                    name="firstName"
+                    onChange={this.handleChange}
+                    placeholder="Adınız..."
+                  />
+                  <span className="focus-input100" />
+                  <span className="symbol-input100">
+                    <i className="fa fa-font" aria-hidden="true" />
+                  </span>
+                </div>
+
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Password is required"
+                >
+                  <input
+                    className="input100"
+                    type="text"
+                    name="lastName"
+                    onChange={this.handleChange}
+                    placeholder="Soyadınız..."
+                  />
+                  <span className="focus-input100" />
+                  <span className="symbol-input100">
+                    <i className="fa fa-font" aria-hidden="true" />
+                  </span>
+                </div>
+
+                <div
+                  className="wrap-input100 validate-input"
+                  id="emailO"
+                  data-validate="Valid email is required: ex@abc.xyz"
+                >
+                  <input
+                    className="input100"
+                    id="email"
+                    type="email"
+                    onChange={this.handleChange}
+                    name="email"
+                    placeholder="Email"
+                    required
+                  />
+                  <span className="focus-input100" />
+                  <span className="symbol-input100">
+                    <i className="fa fa-envelope" aria-hidden="true" />
+                  </span>
+                </div>
+
+                <div
+                  className="wrap-input100 validate-input"
+                  id="passwordO"
+                  data-validate="Password is required"
+                >
+                  <input
+                    className="input100"
+                    id="password"
+                    type="password"
+                    onChange={this.handleChange}
+                    name="password1"
+                    placeholder="Password"
+                  />
+
+                  <span className="symbol-input102">
+                    <i className="fa fa-eye" />
+                  </span>
+
+                  <span className="focus-input100" />
+                  <span className="symbol-input100">
+                    <i className="fa fa-lock" aria-hidden="true" />
+                  </span>
+                </div>
+                <div
+                  className="wrap-input100 validate-input"
+                  data-validate="Password is required"
+                >
+                  <input
+                    className="input100"
+                    id="passwordAgain"
+                    type="password"
+                    onChange={this.handleChange}
+                    name="password2"
+                    placeholder="parola tekrar..."
+                  />
+
+                  <span className="symbol-input102">
+                    <i className="fa fa-eye" />
+                  </span>
+
+                  <span className="focus-input100" />
+                  <span className="symbol-input100">
+                    <i className="fa fa-lock" aria-hidden="true" />
+                  </span>
+                </div>
+
+                
+                <div className="container-login100-form-btn">
+                  <button
+                    className="login100-form-btn"
+                    onClick={this.handleSave}
+                    type="submit"
+                  >
+                    Üye Ol
+                  </button>
+                </div>
+                <div className="text-center p-t-12">
+                  <Link className="txt2" to={"/login"}>
+                    Hesabın varsa
+                    <i
+                      className="fa fa-long-arrow-right m-l-5"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                </div>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+      </form>
     );
   }
 }

@@ -15,6 +15,7 @@ import * as categoryActions from "../../redux/category/CategoryActions";
 import CkEditor from "./CkEditor";
 import ImageChoose from "./ImageChoose";
 import CategoryList from "./CategoryList";
+import LeftNav from "../../containers/user-profile-container/LeftNav";
 
 class index extends Component {
   state = {
@@ -83,8 +84,12 @@ class index extends Component {
   render() {
     return (
       <div>
+        <LeftNav/>
         <Grid container spacing={3}>
           <Grid item xs={12} />
+          <span className="login100-form-title">
+                <b>POST EKLE</b>
+              </span>
           <ImageChoose
             handleFileUpload={this.handleFileUpload}
             imageFile={this.state.imageFile}
@@ -140,7 +145,7 @@ class index extends Component {
                   onClick={this.handleSave}
                   type="submit"
                 >
-                  Üye Ol
+                 Kaydet
                 </button>
               </div>
             </div>

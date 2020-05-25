@@ -13,7 +13,7 @@ export default function SaveCommentReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.CREATE_COMMENT_SUCCESS:
       if (action.payload.status === 200) {
-          console.log("reducerda ife girdi")
+         // console.log("reducerda ife girdi")
         return {
             ...state,
             commentStatus: {
@@ -24,7 +24,7 @@ export default function SaveCommentReducer(state = initialState, action) {
             }
         };
       } else {
-          console.log("reducerda else girdi.")
+         // console.log("reducerda else girdi.")
         return {
             ...state,
             commentStatus: {

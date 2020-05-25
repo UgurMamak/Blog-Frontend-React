@@ -1,45 +1,55 @@
 import { API } from "../../helpers/api-config";
-import { PostWithUrlBody,GetWithUrl } from "../../helpers/url-helper";
-
+import axios from "axios";
 /* Action Types */
 const ADD_LIKE_POST_SUCCESS = "CREATE_COMMENT_SUCCESS";
 const GET_LIKE_POST_SUCCESS = "GET_LIKE_POST_SUCCESS";
+const RESET_STATUS = "RESET_STATUS";
 
-export const actionTypes = { ADD_LIKE_POST_SUCCESS,GET_LIKE_POST_SUCCESS };
+export const actionTypes = {
+  ADD_LIKE_POST_SUCCESS,
+  GET_LIKE_POST_SUCCESS,
+  RESET_STATUS,
+};
 
 export function likePostAddSuccess(comment) {
-  return { type: actionTypes.ADD_LIKE_POST_SUCCESS, payload:comment };
-} 
- 
-export function likePostAdd(likePost) {
-    console.log("like post actiona geldi.");
-    return (dispatch) => {
-      PostWithUrlBody(API + "likepost/add", likePost)
-        .then((response) => {
-          if (response.status === 200) {console.log("like post actiondaki if e girdi.");
-            return response.json();
-          } else {console.log("like post actiondaki else e girdi.");
-            return response.json();
-          } 
-        })
-        .then((responseJson) => {
-          dispatch(likePostAddSuccess(responseJson));
-        })
-        .catch((error) => console.log("Kayıt getirilirken hata oluştu.\n", error));
-    };
-  }
-     
+  return { type: actionTypes.ADD_LIKE_POST_SUCCESS, payload: comment };
+}
 
-  function getLikeSuccess(likeStatus) {
-    return { type: actionTypes.GET_LIKE_POST_SUCCESS, payload: likeStatus };
-  }
-  export function getLikeStatus(postId) {
-    return function (dispatch) {
-      GetWithUrl(API + "likepost/getnumberstatus/?postId="+postId)
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => dispatch(getLikeSuccess(response)))
-        .catch((error) => console.log("Error when fetch categories\n", error));
-    };
-  } 
+export function getLikeSuccess(likeStatus) {
+  return { type: actionTypes.GET_LIKE_POST_SUCCESS, payload: likeStatus };
+}
+
+export function resetStatus() {
+  return { type: actionTypes.RESET_STATUS };
+}
+
+//Posta like dislike olayında bulunmak için yazıldı
+export function likePostAdd(likePost) {
+  return function (dispatch) {
+    let url = API + "likepost/add";
+    axios
+      .post(url, likePost)
+      .then((response) => response.data)
+      .then((result) => {
+        dispatch(likePostAddSuccess(result));
+      })
+      .catch((error) => {
+        console.log("LIKE POST OLAYINDA HATA OLDU");
+      });
+  };
+}
+
+//Posta ait like sayılarını döner
+export function getLikeStatus(postId) {
+  return function (dispatch) {
+    let url = API + "likepost/getnumberstatus/?postId=" + postId;
+    axios
+      .get(url)
+      .then((result) => {
+        dispatch(getLikeSuccess(result.data));
+      })
+      .catch((error) => {
+        console.log("LİKE SAYILARI GELMEDİ", error);
+      });
+  };
+}

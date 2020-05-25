@@ -8,19 +8,15 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-
-
-
+import { Admin, User, Operator } from "../../helpers/role";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 //actions
 import * as userActions from "../../redux/User/UserActions";
-
-
 
 class LeftNav extends Component {
   state = {
@@ -43,42 +39,88 @@ class LeftNav extends Component {
       role="presentation"
       onClick={this.toggleDrawer(anchor, false)}
       onKeyDown={this.toggleDrawer(anchor, false)}
-      style={{"width":"250px"}}
-      
+      style={{ width: "250px" }}
     >
-   
       <List>
         <ListItem button key={"denemekey"}>
           <ListItemIcon>
-           <MailIcon fontSize="large"/>
+            <MailIcon fontSize="large" />
           </ListItemIcon>
-          <ListItemText primary={"label yazısı"}/>
+          <ListItemText primary={"label yazısı"} />
         </ListItem>
       </List>
       <Divider />
+
       <List>
+        <ListItem button key={"adminregister"}>
+          <Link to="/profile">
+            <ListItemIcon>
+              <ExitToAppIcon fontSize="large" />
+            </ListItemIcon>
+            Profil Sayfası
+          </Link>
+        </ListItem>
+
+       
+        <ListItem button key={"userpostcart"}>
+          <Link to="/UserPost">
+            <ListItemIcon>
+              <ExitToAppIcon fontSize="large" />
+            </ListItemIcon>
+            Yazdığın Postlar
+          </Link>
+        </ListItem>
+
+        
+
+        {localStorage.getItem("role") === Admin ? (
+          <div>
+            <ListItem button key={"postadd"}>
+              <Link to="/PostAdd">
+                <ListItemIcon>
+                  <ExitToAppIcon fontSize="large" />
+                </ListItemIcon>
+                Post Ekle
+              </Link>
+            </ListItem>
+
+            <ListItem button key={"adminregister"}>
+              <Link to="/AdminRegister">
+                <ListItemIcon>
+                  <ExitToAppIcon fontSize="large" />
+                </ListItemIcon>
+                Üye Ekle
+              </Link>
+            </ListItem>
+          </div>
+        ) : (
+          <div />
+        )}
+
         <ListItem button key={"denemekey"}>
-          <ListItemIcon>
-           <ExitToAppIcon fontSize="large"/>
-          </ListItemIcon>
-          <Link to="/login" onClick={this.logout}>Çıkış Yap</Link>        
+          <Link to="/login" onClick={this.logout}>
+            <ListItemIcon>
+              <ExitToAppIcon fontSize="large" />
+            </ListItemIcon>
+            Çıkış Yap
+          </Link>
         </ListItem>
       </List>
     </div>
   );
 
-
-  logout=()=>{
-      localStorage.removeItem("userId");
-      localStorage.removeItem("token");
-      this.props.actions.resetLoginState();
-      return <Redirect to="/login" />;
-  }
-
+  logout = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    this.props.actions.resetLoginState();
+    //setAuthorizationToken(false);
+    return <Redirect to="/login" />;
+  };
 
   render() {
     return (
-      <div style={{"backgroundColor":"#ee4266"}}>
+      <div style={{ backgroundColor: "#ee4266" }}>
         {["left"].map((anchor) => (
           <React.Fragment key={anchor}>
             <Button size="large" onClick={this.toggleDrawer(anchor, true)}>
@@ -98,15 +140,11 @@ class LeftNav extends Component {
   }
 }
 
-
-
-  
-  function mapDispatchToProps(dispatch) {
-    return {
-      actions: {
-        resetLoginState: bindActionCreators(userActions.resetLogin, dispatch),
-      },
-    };
-  }
-  export default connect(null,mapDispatchToProps)(LeftNav);
-  
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      resetLoginState: bindActionCreators(userActions.resetLogin, dispatch),
+    },
+  };
+}
+export default connect(null, mapDispatchToProps)(LeftNav);

@@ -25,7 +25,7 @@ export default function SaveUserReducer(state = initialState, action) {
             successfulRegister: 1,
             registerResponse: action.payload
           }
-        };
+        }; 
       
       case actionTypes.CREATE_USER_UNSUCCESS:
         console.log("resucer else",action.payload)

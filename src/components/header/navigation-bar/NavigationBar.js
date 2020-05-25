@@ -7,8 +7,6 @@ import { bindActionCreators } from "redux";
 import * as categoryActions from "../../../redux/category/CategoryActions";
 import * as postCartActions from "../../../redux/cart/PostCartActions";
 
-
-
 class NavigationBar extends Component {
   componentDidMount() {
     this.props.actions.getCategories();
@@ -18,12 +16,8 @@ class NavigationBar extends Component {
   //seçilen kategoriyi gönderme işlemi
   selectCategory(category) {
     this.props.actions.getCart(category.id); //seçilen kategoriye göre postcard listeleme işlemi
-    this.props.actions.changeCategory(category.id)
+    this.props.actions.changeCategory(category.id);
   }
-
-
-
-
 
   render() {
     return (
@@ -42,7 +36,7 @@ class NavigationBar extends Component {
                     {this.props.categories.map((category) => (
                       <li key={category.id}>
                         <Link
-                        to={"/category/" + category.id}
+                          to={"/category/" + category.id}
                           onClick={() => this.selectCategory(category)}
                         >
                           {category.categoryName}
@@ -57,20 +51,10 @@ class NavigationBar extends Component {
             <li>
               <Link to="/contact">İletişim</Link>
             </li>
-
-            <li id="nav2" className="has-dropdown">
-              {/*<a href="/login">Giriş Yap</a>*/}
+            <li>
               <Link to="/login">Giriş Yap</Link>
-              <div className="dropdown">
-                <div className="dropdown-body">
-                  <ul className="dropdown-list">
-                    <li>
-                      
-                    </li>
-                  </ul>
-                </div>
-              </div>
             </li>
+
             <li>
               <Link to="/register">Üye Ol</Link>
             </li>
@@ -99,7 +83,10 @@ function mapDispatchToProps(dispatch) {
         postCartActions.getPostCartCategory,
         dispatch
       ),
-      changeCategory: bindActionCreators(categoryActions.changeCategory,dispatch),
+      changeCategory: bindActionCreators(
+        categoryActions.changeCategory,
+        dispatch
+      ),
     },
   };
 }

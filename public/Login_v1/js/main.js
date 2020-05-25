@@ -44,7 +44,7 @@
       ) {
         return false;
       }
-    } else {console.log("geldi")
+    } else {
       if ($(input).val().trim() == "") {
         return false;
       }

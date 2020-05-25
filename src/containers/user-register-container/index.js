@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 //components
-import RegisterForm from "./RegisterForm2";
+import RegisterForm from "./RegisterForm";
 export default class UserRegisterContainer extends Component {
   render() {
     return (
