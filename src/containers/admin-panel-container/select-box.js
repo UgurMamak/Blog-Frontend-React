@@ -21,7 +21,11 @@ export default class RoleSelectBox extends Component {
           >
             <Select
               className="input100"
-              style={{ borderRadius: "40px", fontSize: "15px" }}
+              style={{
+                borderRadius: "40px",
+                fontSize: "15px",
+                color: "#666666",
+              }}
               labelId="demo-controlled-open-select-label"
               id="demo-controlled-open-select"
               open={this.props.open}
@@ -30,18 +34,15 @@ export default class RoleSelectBox extends Component {
               value={this.props.selectedValue}
               onChange={this.props.changeSelect}
             >
-              <MenuItem value="" style={{ fontSize: "15px" }}>
-                <em>None</em>
-              </MenuItem>
-              <MenuItem style={{ fontSize: "15px" }} value={"SystemAdmin"}>
-                Admin
-              </MenuItem>
-              <MenuItem style={{ fontSize: "15px" }} value={"Operator"}>
-                Operator
-              </MenuItem>
-              <MenuItem style={{ fontSize: "15px" }} value={"user"}>
-                user
-              </MenuItem>
+              {this.props.items.map((role) => (
+                <MenuItem
+                  key={role.id}
+                  style={{ fontSize: "15px" }}
+                  value={role.value}
+                >
+                  {role.name}
+                </MenuItem>
+              ))}
             </Select>
           </div>
         </FormControl>

@@ -11,9 +11,21 @@ import * as postCartActions from "../../redux/cart/PostCartActions";
 import PostCard from "../../components/post-card/PostCard";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Pagination from "../../components/paginiton/Paginition";
 class UserPostCard extends Component {
   componentDidMount() {
     this.props.actions.getUserCart(localStorage.getItem("userId"));
+  }
+  constructor() {
+    super();
+    this.state = {
+      pageOfItems: [],
+    };
+    this.onChangePage = this.onChangePage.bind(this);
+  }
+
+  onChangePage(pageOfItems) {
+    this.setState({ pageOfItems: pageOfItems });
   }
   render() {
     return (
@@ -21,7 +33,7 @@ class UserPostCard extends Component {
         <LeftNav />
 
         <Grid container spacing={3}>
-          <Grid item xs />
+          <Grid item xs /> 
 
           <Grid item style={{ textAlign: "center" }} xs={6}>
             <Paper style={{ textAlign: "center" }}>
@@ -29,7 +41,17 @@ class UserPostCard extends Component {
               <span className="login100-form-title">
                 <b>YAZDIĞIN POSTLAR</b>
               </span>
-              <PostCard postList={this.props.cartReducer.cartList} />
+
+              <PostCard role="admin" postList={this.state.pageOfItems} />
+              <div className="row">
+                <div className="col-md-12">
+                  <Pagination
+                    //items={this.state.exampleItems}
+                    items={this.props.cartReducer.cartList}
+                    onChangePage={this.onChangePage}
+                  />
+                </div>
+              </div>
             </Paper>
           </Grid>
           <Grid item xs />

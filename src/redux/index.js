@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 //category
 import CategoryListReducer from "./category/CategoryListReducer"
 import ChangeCategoryReducer from "./category/ChangeCategoryReducer"
-
+import CategorySaveReducer from "./category/CategorySaveReducer"
 //user
 import SaveUserReducer from "./User/SaveUserReducer"
 import LoginUserReducer from "./User/LoginUserReducer"
@@ -13,6 +13,7 @@ import UpdateUserReducer from "./User/UpdateUserReducer"
 //post
 import PostCartListReducer from "./cart/PostCartListReducer"
 import PostListReducer from "./post/PostListReducer"
+import DeletePostReducer from "./post/DeletePostReducer"
 
 //comment
 import SaveCommentReducer from "./comment/SaveCommentReducer"
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
 
     CategoryListReducer,
     ChangeCategoryReducer,
+    CategorySaveReducer,
 
     SaveUserReducer,
     LoginUserReducer,
@@ -34,12 +36,15 @@ const rootReducer = combineReducers({
     
     PostCartListReducer,
     PostListReducer,
+    DeletePostReducer ,
   
     SaveCommentReducer,
 
     LikePostReducer,
 
-    CkEditorReducer
+    CkEditorReducer,
+    
+
 
   });
   

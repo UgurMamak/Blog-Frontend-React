@@ -39,7 +39,7 @@ class Home2 extends Component {
   //Resim seç butonu
   handleFileUpload = async (event) => {
     this.setState({ imageFile: event.target.files[0] });
-    this.setState({ imagePath: URL.createObjectURL(event.target.files[0]) });
+    this.setState({ imagePath: URL.createObjectURL(event.target.files[0]) });   
   };
 
   handleChange = (event) => {

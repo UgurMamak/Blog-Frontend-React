@@ -57,3 +57,13 @@ export function getUserPostCart(userId) {
     });
   };
 }
+
+//post category slme
+export function deletePostCategory(category) {
+  return function (dispatch) {
+    let url = API + "postCategory/delete";
+    axios
+      .post(url, category)
+      .catch((error) => {console.log("POST CATEGORY DELETE İŞLEMİNDE HATA",error)});
+  };
+}

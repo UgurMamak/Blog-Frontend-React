@@ -92,6 +92,15 @@ class LeftNav extends Component {
                 Üye Ekle
               </Link>
             </ListItem>
+
+            <ListItem button key={"kategori"}>
+              <Link to="/categoryOperation">
+                <ListItemIcon>
+                  <ExitToAppIcon fontSize="large" />
+                </ListItemIcon>
+                Kategori İşlemleri
+              </Link>
+            </ListItem>
           </div>
         ) : (
           <div />

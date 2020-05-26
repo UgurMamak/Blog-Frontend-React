@@ -7,13 +7,26 @@ import * as postCartActions from "../../redux/cart/PostCartActions";
 //componetns
 import PostCard from "../post-card/PostCard";
 
+//import Pagination from "../paginiton/PagiDeneme";
+import Pagination from "../paginiton/Paginition";
+
+
 class Home extends Component {
   //başlangıçta cartlrın listelenmesi için action çağrılır.
-  componentDidMount() { 
+  componentDidMount() {
     this.props.actions.getCart();
   }
-  constructor(props) {
-    super(props);
+
+  constructor() {
+    super();
+    this.state = {
+      pageOfItems: [],
+    };
+    this.onChangePage = this.onChangePage.bind(this);
+  }
+
+  onChangePage(pageOfItems) {
+    this.setState({ pageOfItems: pageOfItems });
   }
 
   render() {
@@ -27,7 +40,18 @@ class Home extends Component {
         </div>
         {/*Title end*/}
 
-        <PostCard postList={this.props.cartReducer.cartList} />
+        {/*<PostCard postList={this.props.cartReducer.cartList} />*/}
+
+        <PostCard postList={this.state.pageOfItems} />
+        <div className="row">
+        <div className="col-md-12">
+        <Pagination
+          //items={this.state.exampleItems}
+          items={this.props.cartReducer.cartList}
+          onChangePage={this.onChangePage}
+        /> 
+        </div>
+        </div>
       </div>
     );
   }

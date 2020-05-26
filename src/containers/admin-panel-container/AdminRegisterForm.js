@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 //actions
@@ -7,13 +7,12 @@ import * as userActions from "../../redux/User/UserActions";
 
 //component
 import LeftNav from "../user-profile-container/LeftNav";
-import RoleSelectBox from "./role-select-box";
+import SelectBox from "./select-box";
 
 class AdminRegisterForm extends Component {
   state = {
     selectedValue: "",
     open: false,
-
     firstName: "",
     lastName: "",
     email: "",
@@ -21,6 +20,23 @@ class AdminRegisterForm extends Component {
     password2: "",
     control: false,
     controlMessage: null,
+    role: [
+      {
+        id:1,
+        name: "Admin",
+        value: "SystemAdmin",
+      },
+      {
+        id:2,
+        name: "Operator",
+        value: "Operator",
+      },
+      {
+        id:3,
+        name: "user",
+        value: "user",
+      },
+    ],
   };
 
   changeSelect = (event) => {
@@ -230,7 +246,8 @@ class AdminRegisterForm extends Component {
                   </div>
                   <div className="form-group">
                     <div className="col-xs-6">
-                      <RoleSelectBox
+                      <SelectBox 
+                        items={this.state.role}
                         changeSelect={this.changeSelect}
                         openSelect={this.openSelect}
                         open={this.state.open}
@@ -261,8 +278,9 @@ class AdminRegisterForm extends Component {
               </div>
               {/*/tab-content*/}
             </div>
-            {/*/col-9*/}
+          
           </div>
+          
         </div>
       </div>
     );

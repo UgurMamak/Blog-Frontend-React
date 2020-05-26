@@ -37,7 +37,7 @@ class NavigationBar extends Component {
                       <li key={category.id}>
                         <Link
                           to={"/category/" + category.id}
-                          onClick={() => this.selectCategory(category)}
+                          onClick={() => this.selectCategory(category)} 
                         >
                           {category.categoryName}
                         </Link>
