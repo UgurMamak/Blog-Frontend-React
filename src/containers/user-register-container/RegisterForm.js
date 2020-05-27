@@ -34,6 +34,7 @@ class RegisterForm extends Component {
   handleFileUpload = async (event) => {
     this.setState({ imageFile: event.target.files[0] });
     this.setState({ imagePath: URL.createObjectURL(event.target.files[0]) });
+    
   };
 
   //datalarımızı alıyoruz. her inputa verilecek inputların içindeki datalar çekilir.
@@ -220,7 +221,7 @@ class RegisterForm extends Component {
                   <span className="symbol-input102">
                     <i className="fa fa-eye" />
                   </span>
-
+ 
                   <span className="focus-input100" />
                   <span className="symbol-input100">
                     <i className="fa fa-lock" aria-hidden="true" />

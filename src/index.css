@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.renk{ 
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;  
+  min-height: 100vh;
+background-image: linear-gradient(to right, #a8546d, #965979, #835e7f, #71617d, #656376, #666b7a, #6a727c, #71787d, #7d898e, #899a9e, #96acae, #a4bebc);
+  background: -webkit-linear-gradient(to right, #a8546d, #965979, #835e7f, #71617d, #656376, #666b7a, #6a727c, #71787d, #7d898e, #899a9e, #96acae, #a4bebc);
+  background: -o-linear-gradient(to right, #a8546d, #965979, #835e7f, #71617d, #656376, #666b7a, #6a727c, #71787d, #7d898e, #899a9e, #96acae, #a4bebc);
+  background: -moz-linear-gradient(to right, #a8546d, #965979, #835e7f, #71617d, #656376, #666b7a, #6a727c, #71787d, #7d898e, #899a9e, #96acae, #a4bebc);
+}

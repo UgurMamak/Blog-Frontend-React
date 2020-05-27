@@ -23,6 +23,8 @@ import LikePostReducer from "./likePost/LikePostReducer"
 
 import CkEditorReducer from "./ckEditor/CkEditorReducer"
 
+import ContactReducer from "./contact/ContactReducer"
+
 const rootReducer = combineReducers({
 
     CategoryListReducer,
@@ -43,6 +45,8 @@ const rootReducer = combineReducers({
     LikePostReducer,
 
     CkEditorReducer,
+
+    ContactReducer
     
 
 

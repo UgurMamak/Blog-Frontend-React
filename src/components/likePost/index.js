@@ -9,11 +9,11 @@ import alertify from "alertifyjs";
 import * as likeActions from "../../redux/likePost/LikePostActions";
 import { Button } from "@material-ui/core";
 
-
 class LikePost extends Component {
   componentDidMount() {
     this.props.actions.getLikeStatus(this.props.postId);
   }
+
   constructor(props) {
     super(props);
     this.handleDislike = this.handleDislike.bind(this);
@@ -26,6 +26,7 @@ class LikePost extends Component {
       userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
       likeStatus: false,
     });
+
     // alertify.success(this.props.likeReducer.likeValue.message);
   };
 
@@ -35,6 +36,7 @@ class LikePost extends Component {
       userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
       likeStatus: true,
     });
+
     // alertify.success(this.props.likeReducer.likeValue.message);
   };
 
@@ -44,10 +46,6 @@ class LikePost extends Component {
     }
     return (
       <div>
-
-
-
-     
         <IconButton
           onClick={this.handleLike}
           color="secondary"

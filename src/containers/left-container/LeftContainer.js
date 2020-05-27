@@ -2,11 +2,14 @@ import React, { Component } from "react";
 
 //components
 import CategoryWidget from "./CategoryWidget";
+import Newsletter from "./newsletter"
 
 export default class LeftContainer extends Component {
   render() {
     return (
       <div>
+     
+     <Newsletter/>
         {/* ad widget*/}
         <div className="aside-widget text-center">
           <a href="/" style={{ display: "inline-block", margin: "auto" }}>
