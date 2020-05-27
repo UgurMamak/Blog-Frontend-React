@@ -24,7 +24,7 @@ export default class LeftContainer extends Component {
           </div>
           <div className="social-widget">
             <ul>
-              <li>
+              <li> 
                 <a href="/" className="social-facebook">
                   <i className="fa fa-facebook" />
                   <span>
@@ -61,24 +61,7 @@ export default class LeftContainer extends Component {
         {/* category widget */}
        <CategoryWidget/>
         {/* /category widget */}
-        {/* newsletter widget */}
-        <div className="aside-widget">
-          <div className="section-title">
-            <h2 className="title">Newsletter</h2>
-          </div>
-          <div className="newsletter-widget">
-            <form>
-              <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
-              <input
-                className="input"
-                name="newsletter"
-                placeholder="Enter Your Email"
-              />
-              <button className="primary-button">Subscribe</button>
-            </form>
-          </div>
-        </div>
-        {/* /newsletter widget */}
+
         {/* post widget */}
         <div className="aside-widget">
           <div className="section-title">

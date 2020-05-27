@@ -10,8 +10,8 @@ export default class newsletter extends Component {
           </div>
           <div className="newsletter-widget">
             <form>
-              <p>Sizde postlar paylaşmak istiyorsanız iletişime geçin.</p>
-             
+              <p>Sizde postlar paylaşmak istiyorsanız CV'nizi iletin.</p>
+              
              <Link to="/contact">
               <button className="primary-button">iletişim</button>
               </Link>

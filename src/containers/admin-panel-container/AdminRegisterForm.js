@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {Admin} from "../../helpers/role"
 //actions
 import * as userActions from "../../redux/User/UserActions";
 
@@ -66,10 +67,11 @@ class AdminRegisterForm extends Component {
       if (this.state.password1 === this.state.password2) {
         const data = new FormData();
         data.append("email", this.state.email);
-        data.append("password", this.state.password1);
+       // data.append("password", this.state.password1);
         data.append("firstName", this.state.firstName);
         data.append("lastName", this.state.lastName);
         data.append("role", this.state.selectedValue);
+        data.append("processType",Admin);
         this.props.actions.saveUser(data);
       } else {
         this.setState({

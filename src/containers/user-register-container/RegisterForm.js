@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
+import {User} from "../../helpers/role"
 //actions
 import * as userActions from "../../redux/User/UserActions";
 //components
@@ -67,6 +68,7 @@ class RegisterForm extends Component {
         data.append("lastName", this.state.lastName);
         data.append("image", this.state.imageFile);
         data.append("role", "user");
+        data.append("processType",User);
         this.props.actions.saveUser(data);
       } else {
         this.setState({
