@@ -11,6 +11,7 @@ import TabContext from "@material-ui/lab/TabContext";
 import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel"; 
 import ReactHtmlParser from "react-html-parser";
+import {Admin,Operator, User} from "../../helpers/role" 
 //actions
 //import * as editorActions from "../../redux/ckEditor/CkEditorActions";
 import * as postActions from "../../redux/post/postActions";
@@ -22,6 +23,7 @@ import ImageChoose from "./ImageChoose";
 import CategoryList from "./CategoryList";
 import LeftNav from "../../containers/user-profile-container/LeftNav";
 import Preview from "./preview";
+import NotFound from "../common/Error404"
 
 class index extends Component {
   state = {
@@ -39,7 +41,6 @@ class index extends Component {
   //Tab değişikliği işlemi
   changeTab = (event, newValue) => {
     this.setState({ tabValue: newValue });
-
   };
 
   //Resim seç butonu
@@ -74,7 +75,7 @@ class index extends Component {
       const data = new FormData();
       data.append("title", this.state.title);
       data.append("content", this.props.content.content);
-      data.append("userId", "34f604a5-5a19-4deb-b823-521665642ad3");
+      data.append("userId", localStorage.getItem("userId"));
       data.append("categoryId", birlestir);
       data.append("image", this.state.imageFile);
       this.props.actions.savePost(data);
@@ -98,6 +99,11 @@ class index extends Component {
     }
   };
   render() {
+
+    if(localStorage.getItem("role")===User)
+    {
+      return <NotFound/>
+    } 
     return (
       <div>
         <LeftNav />
@@ -182,7 +188,7 @@ class index extends Component {
           </TabPanel>
           <TabPanel value="2">
             {" "}
-            <Preview categoryList={this.state.categoryList} title={this.state.title} imagePath={this.state.imagePath} />{" "}
+            {"içerik buraya "}
           </TabPanel>
         </TabContext>
         <Preview categoryList={this.state.categoryList} title={this.state.title} imagePath={this.state.imagePath} />{" "}

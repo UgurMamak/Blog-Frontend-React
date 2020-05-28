@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import alertify from "alertifyjs";
 //actions
 import * as commentActions from "../../../redux/comment/CommentActions";
 class AddComment extends Component {
@@ -15,19 +16,24 @@ class AddComment extends Component {
   };
 
   handleSave = async (event) => {
-    if (this.state.content !== "") {
-      this.props.actions.createComment({
-        content: this.state.content,
-        userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
-        postId: this.props.postId,
-      });
-      this.setState({ controlMessage: "", control: false });
-    } else {
+    if (localStorage.getItem("userId") === null) {
+      alertify.error("Yorum yazabilmek için giriş yapmanız gerekiyor.");
       event.preventDefault();
-      this.setState({
-        controlMessage: "!!!Boş Alan Bırakmayınız.!!!",
-        control: true,
-      });
+    } else {
+      if (this.state.content !== "") {
+        this.props.actions.createComment({
+          content: this.state.content,
+          userId: localStorage.getItem("userId"),
+          postId: this.props.postId,
+        });
+        this.setState({ controlMessage: "", control: false });
+      } else {
+        event.preventDefault();
+        this.setState({
+          controlMessage: "!!!Boş Alan Bırakmayınız.!!!",
+          control: true,
+        });
+      }
     }
   };
 

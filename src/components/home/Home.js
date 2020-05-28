@@ -28,17 +28,19 @@ class Home extends Component {
   onChangePage(pageOfItems) {
     this.setState({ pageOfItems: pageOfItems });
   }
-
+ 
   render() {
     return (
+      <div className="col-md-8">
       <div className="row">
+      
         {/*Title start*/}
         <div className="col-md-12">
           <div className="section-title">
             <h2 className="title">EN SON EKLENEN POSTLAR</h2>
           </div>
         </div>
-        {/*Title end*/}
+        {/*Title end*/} 
 
         {/*<PostCard postList={this.props.cartReducer.cartList} />*/}
 
@@ -52,6 +54,7 @@ class Home extends Component {
         /> 
         </div>
         </div>
+      </div>
       </div>
     );
   }

@@ -18,10 +18,11 @@ class NavigationBar extends Component {
     this.props.actions.getCart(category.id); //seçilen kategoriye göre postcard listeleme işlemi
     this.props.actions.changeCategory(category.id);
   }
-
+ 
   render() {
     return (
       <div id="nav-bottom">
+        {console.log("userId",localStorage.getItem("userId"))}
         <div className="container">
           <ul className="nav-menu">
             <li>

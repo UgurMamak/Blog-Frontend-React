@@ -105,6 +105,7 @@ class RegisterForm extends Component {
             <Grid style={{ textAlign: "center" }} item xs={8}>
               <Grid style={{ textAlign: "center" }} item xs={6}>
                 <ImageChoose
+                imagefile={this.state.imageFile}
                 imagePath={this.state.imagePath===null ? require("./profileImage.jpg"):this.state.imagePath}
                 handleFileUpload={this.handleFileUpload}
                 />

@@ -9,7 +9,8 @@ export default class ListComment extends Component {
         {this.props.commentList.map((cm) => (
           <div className="media" key={cm.id}>
             <div className="media-left">
-              <img
+              <div>
+              <img 
                 className="media-object"
                 src={
                   cm.imageName === null
@@ -18,6 +19,7 @@ export default class ListComment extends Component {
                 }
                 alt=""
               />
+              </div>
             </div>
             <div className="media-body">
               <div className="media-heading">

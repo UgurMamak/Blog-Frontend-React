@@ -15,11 +15,14 @@ class PostHeaderımage extends Component {
           {console.log("bilgi",this.props.postReducer.postDetail)}
             {this.props.postReducer.postDetail.map((pd) => (       
         <div key={pd.postId} id="post-header" className="page-header">
-          <div
+        {/*  <div
             className="page-header-bg"
             style={{ backgroundImage: "url("+API + "postImage/" + pd.imageName+")"}}
             data-stellar-background-ratio="0.5"
-          />
+        />*/}
+         <div className="page-header-bg">
+              <img src={API + "postImage/" + pd.imageName} />
+            </div>
          
           <div className="container">
             <div className="row">

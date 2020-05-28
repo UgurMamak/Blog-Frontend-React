@@ -3,6 +3,7 @@ import "./style.css"
 export default class PostStickyShares extends Component {
     render() {
         return (
+         
             <div className="post-shares sticky-shares">
             <a href="/" className="share-facebook">
               <i className="fa fa-facebook"></i>
@@ -23,6 +24,7 @@ export default class PostStickyShares extends Component {
               <i className="fa fa-envelope"></i>
             </a>
           </div>
+         
         )
     }
 }

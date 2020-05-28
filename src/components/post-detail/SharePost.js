@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class SharePost extends Component {
   render() {
     return (
-      <div className="section-row">
+      <div className="section-row" style={{"clear":"both"}}>
         <div className="post-share">
           <a href="/" className="social-facebook">
             <i className="fa fa-facebook" />

@@ -61,20 +61,17 @@ class LeftNav extends Component {
           </Link>
         </ListItem>
 
-       
-        <ListItem button key={"userpostcart"}>
-          <Link to="/UserPost">
-            <ListItemIcon>
-              <ExitToAppIcon fontSize="large" />
-            </ListItemIcon>
-            Yazdığın Postlar
-          </Link>
-        </ListItem>
-
-        
-
-        {localStorage.getItem("role") === Admin ? (
+        {localStorage.getItem("role") === Admin ||
+        localStorage.getItem("role") === Operator ? (
           <div>
+            <ListItem button key={"userpostcart"}>
+              <Link to="/UserPost">
+                <ListItemIcon>
+                  <ExitToAppIcon fontSize="large" />
+                </ListItemIcon>
+                Yazdığın Postlar
+              </Link>
+            </ListItem>
             <ListItem button key={"postadd"}>
               <Link to="/PostAdd">
                 <ListItemIcon>
@@ -83,7 +80,13 @@ class LeftNav extends Component {
                 Post Ekle
               </Link>
             </ListItem>
+          </div>
+        ) : (
+          <div />
+        )}
 
+        {localStorage.getItem("role") === Admin ? (
+          <div>
             <ListItem button key={"adminregister"}>
               <Link to="/AdminRegister">
                 <ListItemIcon>
@@ -107,7 +110,7 @@ class LeftNav extends Component {
         )}
 
         <ListItem button key={"denemekey"}>
-          <Link to="/login" onClick={this.logout}>
+          <Link to="" onClick={this.logout}>
             <ListItemIcon>
               <ExitToAppIcon fontSize="large" />
             </ListItemIcon>
@@ -124,6 +127,7 @@ class LeftNav extends Component {
     localStorage.removeItem("role");
     this.props.actions.resetLoginState();
     //setAuthorizationToken(false);
+
     return <Redirect to="/login" />;
   };
 

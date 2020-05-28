@@ -49,9 +49,8 @@ class PostCategoryContainer extends Component {
             <div className="row">
               {/*-------------------------------START---------------*/}
 
-              <div className="col-md-8">
-                <Home />
-              </div>
+                <Home /> 
+             
 
               <div className="col-md-4">
                 <LeftContainer />

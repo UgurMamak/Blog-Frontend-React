@@ -26,14 +26,11 @@ import PostCategoryContainer from "./containers/post-category-container/PostCate
 //Admin Component
 import AdminRegister from "./containers/admin-panel-container/AdminRegisterForm";
 import UserPostCart from "./containers/admin-panel-container/UserPostCard";
-import CategoryOperation from "./containers/admin-panel-container/CategoryOperation"
+import CategoryOperation from "./containers/admin-panel-container/CategoryOperation";
 
 import PostAdd from "./components/post-add/";
 
 import UpdatePost from "./containers/admin-panel-container/update-post";
-
-import Delete from "./containers/admin-panel-container/delete-deneme";
-
 
 export default class App extends Component {
   render() {
@@ -41,8 +38,6 @@ export default class App extends Component {
       <div>
         <Header />
         <Switch>
-        <Route exact path="/updatePost/:postId" component={UpdatePost} />
-        <Route exact path="/delete" component={Delete} />
           <Route exact path="/" render={() => <Redirect to="home" />} />
           <Route exact path="/home" component={HomeContainer} />
           <Route
@@ -71,21 +66,28 @@ export default class App extends Component {
                   );
                 }}
               ></Route>*/}
-      
-
-          {/*<PrivateRoute path="/profile" component={UserProfileContainer} />*/}
-
-          <Route path="/categoryOperation" component={CategoryOperation} />
-          <Route path="/AdminRegister" component={AdminRegister} />
-          <Route path="/UserPost" component={UserPostCart} />          
-          <Route path="/profile" component={UserProfileContainer} />
-          <Route exact path="/PostAdd" component={PostAdd} />
-
-          
           <Route path="/Login" component={UserLoginContainer} />
           <Route path="/Register" component={UserRegisterContainer} />
           <Route path="/contact" component={ContactContainer} />
-          <Route path="/admin" component={AdminPanelContainer} />
+
+          {/*Login yapması zorunlu olan sayfalar*/}
+          <PrivateRoute
+            exact
+            path="/updatePost/:postId"
+            component={UpdatePost}
+          />
+          <PrivateRoute path="/profile" component={UserProfileContainer} />
+
+          <PrivateRoute
+            path="/categoryOperation"
+            component={CategoryOperation}
+          />
+          <PrivateRoute path="/AdminRegister" component={AdminRegister} />
+          <PrivateRoute path="/UserPost" component={UserPostCart} />
+          {/*<Route path="/profile" component={UserProfileContainer} />*/}
+          <PrivateRoute exact path="/PostAdd" component={PostAdd} />
+          <PrivateRoute path="/admin" component={AdminPanelContainer} />
+          {/*Login yapması zorunlu olan sayfalar*/}
           <Route component={Error404} />
         </Switch>
         <Footer />

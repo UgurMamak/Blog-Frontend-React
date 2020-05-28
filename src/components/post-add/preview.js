@@ -8,13 +8,93 @@ class Preview extends Component {
   render() {
     return (
       <div>
+        <br/> <br/> <br/>
+        <span className="login100-form-title">
+                <b>ÖN İZLEME</b>
+              </span>
+              <div className="container">
+        <div className="row">
+          <div className="col-md-8">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="post">
+                  <a className="post-img" href="blog-post.html">
+                    <img src={require('./post1.jpg')}  alt="" />
+                  </a>
+                  <div className="post-body">
+                    <div className="post-category">
+                      <a href="category.html">Kategori</a>
+                    </div>
+                    <h3 className="post-title">
+                      <a href="blog-post.html">Başlık</a>
+                    </h3>
+                    <ul className="post-meta">
+                      <li>
+                        <a href="author.html">Yazar ad soyad</a>
+                      </li>
+                      <li>tarih</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="post">
+                  <a className="post-img" href="blog-post.html">
+                    <img  src={this.props.imagePath} alt="" />
+                  </a>
+                  <div className="post-body">
+                    <div className="post-category">
+                      <a href="category.html">Travel</a>
+                    </div>
+                    <h3 className="post-title">
+                      <a href="blog-post.html">{this.props.title}</a>
+                    </h3>
+                    <ul className="post-meta">
+                      <li>
+                        <a href="author.html">John Doe</a>
+                      </li>
+                      <li>20 April 2018</li>
+                    </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        
         <div>
           <div id="post-header" className="page-header">
-            <div
+
+          { /* <div
+            
               className="page-header-bg"
-              style={{ backgroundImage: "url(" + this.props.imagePath + ")" }}
+              style={{   "max-width": "100%",
+                "height": "auto", backgroundImage: "url(" + this.props.imagePath + ")" }}
               data-stellar-background-ratio="0.5"
-            />
+            />*/}
+
+            <div className="page-header-bg">
+              <img src={this.props.imagePath} />
+            </div>
             <div className="container">
               <div className="row">
                 <div className="col-md-10">
@@ -39,44 +119,30 @@ class Preview extends Component {
               </div>
             </div>
           </div>
+       
         </div>
-
-
-
         <div>
-        
-      <div className="section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8">
-              
-
-            <div className="section-row">
-            <h3>{this.props.title}</h3>
-            <div>{ReactHtmlParser(this.props.content.content)}</div>
-
-          </div>
-
-
-
-            </div>     
+          <div className="section">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-8">
+                  <div className="section-row">
+                    <h3>{this.props.title}</h3>
+                    <div>{ReactHtmlParser(this.props.content.content)}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
-
-
-
-
       </div>
     );
   }
 }
 function mapStateToProps(state) {
-    return {
-      content: state.CkEditorReducer, // post ve put işlemi
-    };
-  }
+  return {
+    content: state.CkEditorReducer, // post ve put işlemi
+  };
+}
 
-
-  export default connect(mapStateToProps, null)(Preview);
+export default connect(mapStateToProps, null)(Preview);

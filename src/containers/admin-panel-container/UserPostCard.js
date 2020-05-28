@@ -6,12 +6,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 //actions
 import * as postCartActions from "../../redux/cart/PostCartActions";
+import {Admin,Operator, User} from "../../helpers/role" 
 
 //componetns
 import PostCard from "../../components/post-card/PostCard";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Pagination from "../../components/paginiton/Paginition";
+import NotFound from "../../components/common/Error404"
 class UserPostCard extends Component {
   componentDidMount() {
     this.props.actions.getUserCart(localStorage.getItem("userId"));
@@ -28,6 +30,14 @@ class UserPostCard extends Component {
     this.setState({ pageOfItems: pageOfItems });
   }
   render() {
+
+
+    if(localStorage.getItem("role")===User)
+    {
+      return <NotFound/>
+    } 
+
+
     return (
       <div>
         <LeftNav />

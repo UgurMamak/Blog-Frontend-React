@@ -9,7 +9,7 @@ import * as userActions from "../../redux/User/UserActions";
 //component
 import LeftNav from "../user-profile-container/LeftNav";
 import SelectBox from "./select-box";
-
+import NotFound from "../../components/common/Error404"
 class AdminRegisterForm extends Component {
   state = {
     selectedValue: "",
@@ -89,6 +89,11 @@ class AdminRegisterForm extends Component {
   };
 
   render() {
+
+    if(localStorage.getItem("role")!==Admin)
+    {
+      return <NotFound/>
+    } 
     return (
       <div>
         <div>

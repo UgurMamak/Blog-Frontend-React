@@ -52,7 +52,8 @@ class PostCard extends Component {
         />
         {this.props.postList.map((ps) => (
           <div className="col-md-6" key={ps.postId}>
-            {console.log("role", this.props.role)}
+
+            
             {this.props.role !== undefined ? (
               <div>
                 <IconButton aria-label="delete" onClick={()=>this.handleDeletePost(ps)}>
@@ -122,7 +123,7 @@ function mapDispatchToProps(dispatch) {
       getCategories: bindActionCreators(
         categoryActions.getCategories,
         dispatch
-      ),
+      ), 
 
       getCart: bindActionCreators(
         postCartActions.getPostCartCategory,

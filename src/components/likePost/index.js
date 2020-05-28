@@ -21,21 +21,30 @@ class LikePost extends Component {
   }
 
   handleDislike = (event) => {
-    this.props.actions.likeStatus({
-      postId: this.props.postId,
-      userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
-      likeStatus: false,
-    });
-
-    // alertify.success(this.props.likeReducer.likeValue.message);
+    if(localStorage.getItem("userId")===null)
+    {alertify.error("Postu beğenmek için sisteme giriş yapmanız gerekiyor.");}
+    else
+    {
+      this.props.actions.likeStatus({
+        postId: this.props.postId,
+        userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
+        likeStatus: false,
+      });
+    }
   };
 
   handleLike = (event) => {
-    this.props.actions.likeStatus({
-      postId: this.props.postId,
-      userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
-      likeStatus: true,
-    });
+    if(localStorage.getItem("userId")===null)
+    {alertify.error("Postu beğenmek için sisteme giriş yapmanız gerekiyor.");}
+    else
+    {
+      this.props.actions.likeStatus({
+        postId: this.props.postId,
+        userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
+        likeStatus: true,
+      });
+    }
+   
 
     // alertify.success(this.props.likeReducer.likeValue.message);
   };

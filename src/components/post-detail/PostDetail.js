@@ -14,7 +14,8 @@ import NotFount from "../../components/common/Error404";
 import ListComment from "../../components/comment/list-comment/ListComment";
 import AddComment from "../comment/add-comment/AddComment";
 import LikePost from "../../components/likePost/";
-import PostHeaderImage from "./PostHeaderımage"
+import PostHeaderImage from "./PostHeaderımage";
+import PostStickyShares from "./PostStickyShares";
 class PostDetail extends Component {
   componentDidMount() {
     this.props.actions.getPost(this.props.postId);
@@ -22,19 +23,18 @@ class PostDetail extends Component {
 
   renderEmpty() {
     return <NotFount />;
-  } 
+  }
   renderPostDetail() {
     return (
       <div>
-        
-        <SharePost />
+        <PostStickyShares />
+        <div style={{ clear: "both" }} />
         {/* post content */}
         {this.props.postReducer.postDetail.map((pd) => (
           <div className="section-row" key={pd.postId}>
-            <LikePost postId={pd.postId} />
             <h3>{pd.title}</h3>
             <div>{ReactHtmlParser(pd.content)}</div>
-
+            <LikePost postId={pd.postId} />
             <ListComment commentList={pd.comments} />
             <AddComment postId={pd.postId} />
           </div>
