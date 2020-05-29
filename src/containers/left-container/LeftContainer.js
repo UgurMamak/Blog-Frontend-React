@@ -1,22 +1,16 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 //components
 import CategoryWidget from "./CategoryWidget";
 import Newsletter from "./newsletter"
-
+import PopularPost from "../../components/popular-post/"
 export default class LeftContainer extends Component {
   render() {
     return (
       <div>
      
      <Newsletter/>
-        {/* ad widget*/}
-        <div className="aside-widget text-center">
-          <a href="/" style={{ display: "inline-block", margin: "auto" }}>
-            <img className="img-responsive" src="callie/img/ad-3.jpg" alt="" />
-          </a>
-        </div>
-        {/* /ad widget */}
+        
         {/* social widget */}
         <div className="aside-widget">
           <div className="section-title">
@@ -25,32 +19,31 @@ export default class LeftContainer extends Component {
           <div className="social-widget">
             <ul>
               <li> 
-                <a href="/" className="social-facebook">
+                <a href="https://tr-tr.facebook.com/" target="_blank" className="social-facebook">
                   <i className="fa fa-facebook" />
                   <span>
-                    21.2K
+                   
                     <br />
-                    Followers
-                  </span>
+                    Takip et
+                  </span> 
                 </a>
               </li>
               <li>
-                <a href="/" className="social-twitter">
+                <a href="https://twitter.com/home" target="_blank" className="social-twitter">
                   <i className="fa fa-twitter" />
                   <span>
-                    10.2K
                     <br />
-                    Followers
+                 Takip et
                   </span>
                 </a>
               </li>
               <li>
-                <a href="/" className="social-google-plus">
+                <a href="https://www.google.com.tr/webhp?tab=kw&authuser=0" target="_blank" className="social-google-plus">
                   <i className="fa fa-google-plus" />
                   <span>
                     5K
                     <br />
-                    Followers
+                  Takip et
                   </span>
                 </a>
               </li>
@@ -61,85 +54,8 @@ export default class LeftContainer extends Component {
         {/* category widget */}
        <CategoryWidget/>
         {/* /category widget */}
-
+        <PopularPost/> 
         {/* post widget */}
-        <div className="aside-widget">
-          <div className="section-title">
-            <h2 className="title">Popular Posts</h2>
-          </div>
-          {/* post */}
-          <div className="post post-widget">
-            <a className="post-img" href="blog-post.html">
-              <img src="callie/img/widget-3.jpg" alt="" />
-            </a>
-            <div className="post-body">
-              <div className="post-category">
-                <a href="category.html">Lifestyle</a>
-              </div>
-              <h3 className="post-title">
-                <a href="blog-post.html">
-                  Ne bonorum praesent cum, labitur persequeris definitionem quo
-                  cu?
-                </a>
-              </h3>
-            </div>
-          </div>
-          {/* /post */}
-          {/* post */}
-          <div className="post post-widget">
-            <a className="post-img" href="blog-post.html">
-              <img src="callie/img/widget-2.jpg" alt="" />
-            </a>
-            <div className="post-body">
-              <div className="post-category">
-                <a href="category.html">Technology</a>
-                <a href="category.html">Lifestyle</a>
-              </div>
-              <h3 className="post-title">
-                <a href="blog-post.html">
-                  Mel ut impetus suscipit tincidunt. Cum id ullum laboramus
-                  persequeris.
-                </a>
-              </h3>
-            </div>
-          </div>
-          {/* /post */}
-          {/* post */}
-          <div className="post post-widget">
-            <a className="post-img" href="blog-post.html">
-              <img src="callie/img/widget-4.jpg" alt="" />
-            </a>
-            <div className="post-body">
-              <div className="post-category">
-                <a href="category.html">Health</a>
-              </div>
-              <h3 className="post-title">
-                <a href="blog-post.html">
-                  Postea senserit id eos, vivendo periculis ei qui
-                </a>
-              </h3>
-            </div>
-          </div>
-          {/* /post */}
-          {/* post */}
-          <div className="post post-widget">
-            <a className="post-img" href="blog-post.html">
-              <img src="callie/img/widget-5.jpg" alt="" />
-            </a>
-            <div className="post-body">
-              <div className="post-category">
-                <a href="category.html">Health</a>
-                <a href="category.html">Lifestyle</a>
-              </div>
-              <h3 className="post-title">
-                <a href="blog-post.html">
-                  Sed ut perspiciatis, unde omnis iste natus error sit
-                </a>
-              </h3>
-            </div>
-          </div>
-          {/* /post */}
-        </div>
         {/* /post widget */}
       </div>
     );

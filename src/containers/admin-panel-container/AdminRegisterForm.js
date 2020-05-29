@@ -7,7 +7,8 @@ import {Admin} from "../../helpers/role"
 import * as userActions from "../../redux/User/UserActions";
 
 //component
-import LeftNav from "../user-profile-container/LeftNav";
+import LeftNav from "../../components/LeftNav/LeftNav";
+
 import SelectBox from "./select-box";
 import NotFound from "../../components/common/Error404"
 class AdminRegisterForm extends Component {

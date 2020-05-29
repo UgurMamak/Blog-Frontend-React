@@ -9,7 +9,7 @@ import * as userActions from "../../redux/User/UserActions";
 //componenets
 import ImageChoose from "./ImageChoose";
 
-class Home2 extends Component {
+class UserUpdateForm extends Component {
   
   componentDidMount() {
     this.props.actions.getUser(localStorage.getItem("userId"));
@@ -105,7 +105,7 @@ class Home2 extends Component {
               <div className="col-sm-10">
                 <h1>{user.firstName + "  " + user.lastName}</h1>
               </div>
-            </div>
+            </div> 
             <div className="row">
               <ImageChoose
                 handleFileUpload={this.handleFileUpload}
@@ -228,7 +228,7 @@ class Home2 extends Component {
       </div>
     );
   }
-}
+} 
 
 function mapStateToProps(state) {
   return {
@@ -245,4 +245,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home2);
+export default connect(mapStateToProps, mapDispatchToProps)(UserUpdateForm);

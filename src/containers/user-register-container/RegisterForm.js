@@ -89,10 +89,10 @@ class RegisterForm extends Component {
     if (
       this.props.user.registerStatus.registerInProgress === 0 &&
       this.props.user.registerStatus.successfulRegister === 1
-    ) {
+    ) { 
         console.log("comp",this.props.user);
       //this.props.resetRegisterState();
-      // return (<Redirect to='/login'/>)
+       return (<Redirect to={"/profile/"+this.props.user.registerStatus.registerResponse.userId}/>)
     }
     
     return (

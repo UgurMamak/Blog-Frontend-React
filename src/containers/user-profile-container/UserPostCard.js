@@ -1,54 +1,72 @@
 import React, { Component } from "react";
 import { API } from "../../helpers/api-config";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
-import AlertDialog from "../../containers/admin-panel-container/alert-dialog";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
+import { Admin } from "../../helpers/role";
+
 //actions
 import * as categoryActions from "../../redux/category/CategoryActions";
 import * as postCartActions from "../../redux/cart/PostCartActions";
 import * as postActions from "../../redux/post/postActions";
-import * as userActions from "../../redux/User/UserActions"
+import * as userActions from "../../redux/User/UserActions";
+//import AlertDialog from "../../containers/admin-panel-container/alert-dialog";
+import AlertDialog from "../admin-panel-container/alert-dialog";
 
 class PostCard extends Component {
   selectCategory(category) {
     this.props.actions.getCart(category.categoryId); //seçilen kategoriye göre postcard listeleme işlemi
     this.props.actions.changeCategory(category.categoryId);
   }
-  userInfo(userId,firstName,lastName)
-  {
-   const deger={
-      userId:userId,
-      firstName:firstName,
-      lastName:lastName 
-    }
-    this.props.actions.userInfo(deger);
-  }
-
-  state = { open: false, temp: {} };
   handleDeletePost = (ps) => {
-    console.log(ps); 
-    this.setState({temp:ps});
+    console.log(ps);
+    this.setState({ temp: ps });
     this.setState({ open: true });
   };
   handleAgreeDeletePost = () => {
     this.setState({ open: false });
     console.log("evet sile basldı");
-    console.log("agree",this.state.temp.imageName);
-    console.log("postId",this.state.temp.postId);
+    console.log("agree", this.state.temp.imageName);
+    console.log("postId", this.state.temp.postId);
     const data = new FormData();
     data.append("imageName", this.state.temp.imageName);
-    data.append("id",this.state.temp.postId);
+    data.append("id", this.state.temp.postId);
     this.props.actions.deletePost(data);
     window.location.reload();
   };
   handleDisAgreeDeletePost = () => {
     this.setState({ open: false });
     console.log("hayıra basldı");
-  }; 
+  };
+
+  userInfo(userId, firstName, lastName) {
+    const deger = {
+      userId: userId,
+      firstName: firstName,
+      lastName: lastName,
+    };
+    this.props.actions.userInfo(deger);
+  }
+
+  state = { open: false, temp: {}, anchorEl: null };
+  handleToggleClick = (event) => {
+    this.setState({ anchorEl: event.currentTarget });
+    console.log("seçilen", event.currentTarget);
+  };
+  handleToggleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  yonlendir = async (postId) => {
+    console.log("gelen", postId);
+  };
+
   render() {
     return (
       <div>
@@ -60,32 +78,39 @@ class PostCard extends Component {
           handleDisAgreeDeletePost={this.handleDisAgreeDeletePost}
           handleAgreeDeletePost={this.handleAgreeDeletePost}
         />
-        {console.log("post",this.props.postList)}
         {this.props.postList.map((ps) => (
-          <div className="col-md-6" key={ps.postId}>
-
-            
-            {this.props.role !== undefined ? (
+          <div className="col-md-4" key={ps.postId}>
+            {localStorage.getItem("userId") === ps.userId ||
+            localStorage.getItem("role") === Admin ? (
               <div>
-                <IconButton aria-label="delete" onClick={()=>this.handleDeletePost(ps)}>
-                  <DeleteIcon fontSize="large" color="secondary" />
+                <Link to={"/updatePost/" + ps.postId}>
+                  <IconButton
+                    aria-label="more"
+                    aria-controls="long-menu"
+                    aria-haspopup="true"
+                  >
+                    <UpdateIcon />
+                    güncelle
+                  </IconButton>
+                </Link>
+
+                <IconButton
+                  aria-label="more"
+                  aria-controls="long-menu"
+                  aria-haspopup="true"
+                  onClick={() => this.handleDeletePost(ps)}
+                >
+                  <DeleteIcon />
                   Sil
                 </IconButton>
-                <Link to={"/updatePost/"+ps.postId}>
-                <IconButton aria-label="delete" onClick={this.deletePost}>
-                  <UpdateIcon fontSize="large" color="secondary" />
-                  Güncelle
-                </IconButton>
-                </Link>
               </div>
             ) : (
               <div />
             )}
-
             <div className="post">
-              <Link className="post-img" to={"PostDetail/" + ps.postId}>
+              <Link className="post-img" to={"/PostDetail/" + ps.postId}>
                 <img src={API + "postImage/" + ps.imageName} alt="" />
-              </Link> 
+              </Link>
               <div className="post-body">
                 <div className="post-category">
                   {ps.postCategoryListDtos.map((pc) => (
@@ -97,16 +122,23 @@ class PostCard extends Component {
                       {pc.categoryName}
                       {"   "}
                     </Link>
-                  ))} 
+                  ))}
                 </div>
- 
+
                 <h3 className="post-title">
-                  <a href={"PostDetail/" + ps.postId}>{ps.title}</a>
+                  <a href={"/PostDetail/" + ps.postId}>{ps.title}</a>
                 </h3>
                 <ul className="post-meta">
                   <li>
-                    <Link to={"/profile/"+ps.userId}onClick={()=>this.userInfo(ps.userId,ps.firstName,ps.lastName)}>{ps.firstName + " " + ps.lastName}</Link>
-                  </li> 
+                    <Link
+                      to={"/profile/" + ps.userId}
+                      onClick={() =>
+                        this.userInfo(ps.userId, ps.firstName, ps.lastName)
+                      }
+                    >
+                      {ps.firstName + " " + ps.lastName}
+                    </Link>
+                  </li>
                   <li>{ps.publishDate}</li>
 
                   <li>
@@ -115,9 +147,6 @@ class PostCard extends Component {
                   <li>
                     <span className="fa fa-heart"></span> {ps.likeNumber}
                   </li>
-                  {/*<li>
-                    <span className="fa fa-eye"></span> 3
-                  </li>*/}
                 </ul>
               </div>
             </div>
@@ -127,20 +156,20 @@ class PostCard extends Component {
     );
   }
 }
+/*
 function mapStateToProps(state) {
   return {
     user: state.UserInfoReducer, // post ve put işlemi
   };
 }
-
+*/
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
       getCategories: bindActionCreators(
         categoryActions.getCategories,
         dispatch
-      ), 
-
+      ),
       getCart: bindActionCreators(
         postCartActions.getPostCartCategory,
         dispatch
@@ -150,14 +179,8 @@ function mapDispatchToProps(dispatch) {
         dispatch
       ),
 
-      deletePost:bindActionCreators(
-        postActions.deletePost,
-        dispatch
-      ),
-      userInfo:bindActionCreators(
-        userActions.userInfo,
-        dispatch
-      ),
+      userInfo: bindActionCreators(userActions.userInfo, dispatch),
+      deletePost: bindActionCreators(postActions.deletePost, dispatch),
     },
   };
 }

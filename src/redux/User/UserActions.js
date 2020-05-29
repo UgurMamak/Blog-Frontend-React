@@ -22,6 +22,9 @@ const RESET_LOGIN = "RESET_LOGIN";
 const GET_IMAGE = "GET_IMAGE";
 const POST_IMAGE = "POST_IMAGE";
 
+
+const GET_USER_INFO ="GET_USER_INFO"
+
 export const actionTypes = {
   GET_USER_SUCCESS,
   CREATE_USER_SUCCESS,
@@ -34,6 +37,7 @@ export const actionTypes = {
   POST_IMAGE,
   CREATE_USER_UNSUCCESS,
   FAIL_LOGIN,
+  GET_USER_INFO
 };
 
 //------------------------REGISTER------------------------------------
@@ -88,23 +92,6 @@ export function saveUser(user) {
 }
 
 //---------------------LOGIN
-/*
-export function LoginUser(user){
-  return function (dispatch){
-    let url =API + "auth/login";
-    axios.post(url,user)
-    .then(response=>response.data)
-    .then(result=>{
-      const token=result.token;
-      localStorage.setItem("token",token);
-      localStorage.setItem("userId",result.userId)
-      setAuthorizationToken(token);
-      dispatch(PostUserLoginSuccess(result))})  
-      .catch((error)=>{
-      dispatch(failLogin(error.response.data))})
-  }}
-*/
-
 export function LoginUser(user) {
   return function (dispatch) {
     let url = API + "auth/login";
@@ -165,37 +152,7 @@ export function updateUser(user) {
   };
 }
 
-/*
-//IMAGE SAVE
-export function saveUserImage(user) {
-  return function (dispatch) {
-    PostWithUrlBodyImage(API + "deneme/uploadfile3", user)
-      .then((response) => {
-        return response.text();
-      })
-      .catch((error) => console.log("Error when fetch categories\n", error));
-  };
+//GET USER İNFO
+export function userInfo(user) {console.log("user infoaction değeri",user)
+  return { type: actionTypes.GET_USER_INFO, payload: user };
 }
-
-export function getImageSuccess(img) {
-  return { type: actionTypes.GET_IMAGE, payload: img };
-}
-
-export function postImageSuccess(img) {
-  return { type: actionTypes.POST_IMAGE, payload: img };
-}
-
-export function getResim() {
-  return function (dispatch) {
-    GetWithUrl(API + "deneme/getimg")
-      // .then(response => {return response.json();})
-      .then((response) => {
-        return response.text();
-      })
-
-      .then((response) => dispatch(getImageSuccess(response)))
-
-      .catch((error) => console.log("Error when fetch categories\n", error));
-  };
-}
-*/

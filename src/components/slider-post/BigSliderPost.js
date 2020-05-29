@@ -9,12 +9,12 @@ export default class BigSliderPost extends Component {
                     <a className="post-img" href="blog-post.html"><img src={require("../../images/hot-post-1.jpg")}   alt="" /></a>
                     <div className="post-body">
                       <div className="post-category">
-                        <a href="category.html">Lifestyle</a>
+                        <a href="category.html">sağlık</a>
                       </div>
-                      <h3 className="post-title title-lg"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei qui</a></h3>
+                      <h3 className="post-title title-lg"><a href="blog-post.html">Post deneme1</a></h3>
                       <ul className="post-meta">
-                        <li><a href="author.html">John Doe</a></li>
-                        <li>20 April 2018</li>
+                        <li><a href="author.html">uğur mamak</a></li>
+                        <li>20 nisan 2020</li>
                       </ul>
                     </div>
                   </div>

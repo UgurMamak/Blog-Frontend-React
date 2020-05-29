@@ -29,7 +29,7 @@ class NavigationBar extends Component {
               <Link to="/">Anasayfa</Link>
             </li>
             <li id="nav2" className="has-dropdown">
-              <Link to={""}>Kategoriler</Link>
+              <Link to={""}>Kategoriler</Link> 
 
               <div className="dropdown">
                 <div className="dropdown-body">

@@ -49,7 +49,7 @@ export default class Paginition extends Component {
     currentPage = currentPage || 1;
 
     // her sayfada kaç tane post olacağını belirledik.
-    pageSize = pageSize || 5;
+    pageSize = pageSize || 6;
 
     // gelen dataya göre kaçtane sayfa oluşturalacağını
     var totalPages = Math.ceil(totalItems / pageSize);

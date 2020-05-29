@@ -9,12 +9,12 @@ export default class SmallSliderPost extends Component {
               <a className="post-img" href="blog-post.html"><img  src={require("../../images/hot-post-2.jpg")}  alt="" /></a>
               <div className="post-body">
                 <div className="post-category">
-                  <a href="category.html">Lifestyle</a>
+                  <a href="category.html">sağlık</a>
                 </div>
-                <h3 className="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error sit</a></h3>
+                <h3 className="post-title"><a href="blog-post.html">post deneme2</a></h3>
                 <ul className="post-meta">
-                  <li><a href="author.html">John Doe</a></li>
-                  <li>20 April 2018</li>
+                  <li><a href="author.html">uğur mamak</a></li>
+                  <li>20 nisan 2020</li>
                 </ul>
               </div>
             </div>
@@ -24,13 +24,13 @@ export default class SmallSliderPost extends Component {
               <a className="post-img" href="blog-post.html"><img src={require("../../images/hot-post-3.jpg")} alt="" /></a>
               <div className="post-body">
                 <div className="post-category">
-                  <a href="category.html">Fashion</a>
-                  <a href="category.html">Lifestyle</a>
+                  <a href="category.html">moda</a>
+                  <a href="category.html">yaşam</a>
                 </div>
-                <h3 className="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id ullum laboramus persequeris.</a></h3>
+                <h3 className="post-title"><a href="blog-post.html">post deneme3</a></h3>
                 <ul className="post-meta">
-                  <li><a href="author.html">John Doe</a></li>
-                  <li>20 April 2018</li>
+                  <li><a href="author.html">uğur mamak</a></li>
+                  <li>20 nisan 2020</li>
                 </ul>
               </div>
             </div>

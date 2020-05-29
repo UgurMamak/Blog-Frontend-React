@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
-import LeftNav from "../user-profile-container/LeftNav";
+import LeftNav from "../../components/LeftNav/LeftNav";
 import Grid from "@material-ui/core/Grid";
 import {Admin,Operator, User} from "../../helpers/role"
 //component

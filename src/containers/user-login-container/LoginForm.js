@@ -144,13 +144,14 @@ class LoginForm extends Component {
       this.props.user.loginStatus.loginInProgress === 0 &&
       this.props.user.loginStatus.successfulLogin === 1
     ) {
-      //localStorage.setItem("token", this.props.user.jsonToken.token);
-      //localStorage.setItem("userId", this.props.user.userId);
-      //console.log(this.props.user.jsonToken.token);
-
-      return <Redirect to="/profile" />; // kullanıcı adı ve şifre doğru ie home sayfasına yönlendirilir.
+      return <Redirect to={"/profile/"+this.props.user.userId} />; // kullanıcı adı ve şifre doğru ie home sayfasına yönlendirilir.
     }
 
+    if(localStorage.getItem("userId")!==null)
+    {
+      return <Redirect to={"/profile/"+localStorage.getItem("userId")} />
+    }
+ 
     console.log(this.props.user.loginStatus);
     return (
       <div>

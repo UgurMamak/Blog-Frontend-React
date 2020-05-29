@@ -9,11 +9,14 @@ import SaveUserReducer from "./User/SaveUserReducer"
 import LoginUserReducer from "./User/LoginUserReducer"
 import UserListReducer from "./User/UserListReducer"
 import UpdateUserReducer from "./User/UpdateUserReducer"
+import UserInfoReducer from "./User/UserInfoReducer"
 
 //post
 import PostCartListReducer from "./cart/PostCartListReducer"
 import PostListReducer from "./post/PostListReducer"
 import DeletePostReducer from "./post/DeletePostReducer"
+import PopularPostReducer from "./cart/PopularPostReducer"
+import ConfirmPostReducer from "./cart/ConfirmPostReducer"
 
 //comment
 import SaveCommentReducer from "./comment/SaveCommentReducer"
@@ -35,10 +38,13 @@ const rootReducer = combineReducers({
     LoginUserReducer,
     UserListReducer,
     UpdateUserReducer,
+    UserInfoReducer,
     
     PostCartListReducer,
     PostListReducer,
     DeletePostReducer ,
+    PopularPostReducer,
+    ConfirmPostReducer,
   
     SaveCommentReducer,
 

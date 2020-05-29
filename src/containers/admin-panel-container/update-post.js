@@ -15,7 +15,7 @@ import FaceIcon from "@material-ui/icons/Face";
 
 //component
 import NotFount from "../../components/common/Error404";
-import LeftNav from "../user-profile-container/LeftNav";
+import LeftNav from "../../components/LeftNav/LeftNav";
 import Ckeditor from "../../components/post-add/CkEditor";
 import ImageChoose from "../../components/post-add/ImageChoose";
 import CategoryList from "../../components/post-add/CategoryList";
@@ -39,7 +39,7 @@ class UpdatePost extends Component {
     this.setState({ imageFile: event.target.files[0] });
     this.setState({ imagePath: URL.createObjectURL(event.target.files[0]) });
   };
-
+ 
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
@@ -86,6 +86,7 @@ class UpdatePost extends Component {
     data.append("categoryId", birlestir);
     data.append("image", this.state.imageFile);
     data.append("imageName", post.imageName);
+    data.append("isDeleted", false);
     data.append("id", this.props.match.params.postId);
     this.props.actions.updatePost(data);
     window.location.reload();

@@ -42,36 +42,17 @@ class LeftNav extends Component {
       style={{ width: "250px" }}
     >
       <List>
-        <ListItem button key={"denemekey"}>
-          <ListItemIcon>
-            <MailIcon fontSize="large" />
-          </ListItemIcon>
-          <ListItemText primary={"label yazısı"} />
-        </ListItem>
-      </List>
-      <Divider />
-
-      <List>
-        <ListItem button key={"adminregister"}>
-          <Link to="/profile">
+        <ListItem button key={""}>
+          <Link to={"/profile/" + localStorage.getItem("userId")}>
             <ListItemIcon>
               <ExitToAppIcon fontSize="large" />
             </ListItemIcon>
             Profil Sayfası
           </Link>
         </ListItem>
-
         {localStorage.getItem("role") === Admin ||
         localStorage.getItem("role") === Operator ? (
           <div>
-            <ListItem button key={"userpostcart"}>
-              <Link to="/UserPost">
-                <ListItemIcon>
-                  <ExitToAppIcon fontSize="large" />
-                </ListItemIcon>
-                Yazdığın Postlar
-              </Link>
-            </ListItem>
             <ListItem button key={"postadd"}>
               <Link to="/PostAdd">
                 <ListItemIcon>
@@ -87,6 +68,15 @@ class LeftNav extends Component {
 
         {localStorage.getItem("role") === Admin ? (
           <div>
+            <ListItem button key={"confirmpost"}>
+              <Link to="/confirmPostPage">
+                <ListItemIcon>
+                  <ExitToAppIcon fontSize="large" />
+                </ListItemIcon>
+                Onay Bekleyen Postlar
+              </Link>
+            </ListItem>
+
             <ListItem button key={"adminregister"}>
               <Link to="/AdminRegister">
                 <ListItemIcon>
@@ -108,7 +98,7 @@ class LeftNav extends Component {
         ) : (
           <div />
         )}
-
+        <Divider />
         <ListItem button key={"denemekey"}>
           <Link to="" onClick={this.logout}>
             <ListItemIcon>

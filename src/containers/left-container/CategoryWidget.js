@@ -1,16 +1,20 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+//actions
+import * as categoryActions from "../../redux/category/CategoryActions";
+import * as postCartActions from "../../redux/cart/PostCartActions";
 
-export default class CategoryWidget extends Component {
-  //Kategorileri ve o kategoride bulunan post sayısını listeler
-  state = {
-    home: [
-      { id: "1", cat: "Lifestyle", adet: "5" },
-      { id: "2", cat: "Fashion", adet: "10" },
-      { id: "3", cat: "Technology ", adet: "15" },
-      { id: "4", cat: " Travel ", adet: "20" },
-      { id: "5", cat: "  Health ", adet: "25" },
-    ],
-  };
+class CategoryWidget extends Component {
+  componentDidMount() {
+    this.props.actions.getCategories();
+  }
+  //seçilen kategoriyi gönderme işlemi
+  selectCategory(category) {
+    this.props.actions.getCart(category.id); //seçilen kategoriye göre postcard listeleme işlemi
+    this.props.actions.changeCategory(category.id);
+  }
 
   render() {
     return (
@@ -20,11 +24,14 @@ export default class CategoryWidget extends Component {
         </div>
         <div className="category-widget">
           <ul>
-            {this.state.home.map((cat) => (
-              <li key={cat.id}>
-                <a href="/">
-                  {cat.cat} <span>{cat.adet}</span>
-                </a>
+            {this.props.categories.map((category) => (
+              <li key={category.id}>
+                <Link
+                  to={"/category/" + category.id}
+                  onClick={() => this.selectCategory(category)}
+                >
+                  {category.categoryName}
+                </Link>
               </li>
             ))}
           </ul>
@@ -33,3 +40,29 @@ export default class CategoryWidget extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    categories: state.CategoryListReducer, //kategorileri listelemek için
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      getCategories: bindActionCreators(
+        categoryActions.getCategories,
+        dispatch
+      ),
+
+      getCart: bindActionCreators(
+        postCartActions.getPostCartCategory,
+        dispatch
+      ),
+      changeCategory: bindActionCreators(
+        categoryActions.changeCategory,
+        dispatch
+      ),
+    },
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryWidget);

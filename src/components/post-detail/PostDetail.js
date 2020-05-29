@@ -27,6 +27,7 @@ class PostDetail extends Component {
   renderPostDetail() {
     return (
       <div>
+        
         <PostStickyShares />
         <div style={{ clear: "both" }} />
         {/* post content */}

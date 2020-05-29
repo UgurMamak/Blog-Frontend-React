@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import LeftNav from "../user-profile-container/LeftNav";
+import LeftNav from "../../components/LeftNav/LeftNav";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -37,11 +37,11 @@ class UserPostCard extends Component {
       return <NotFound/>
     } 
 
-
+ 
     return (
       <div>
         <LeftNav />
-
+ 
         <Grid container spacing={3}>
           <Grid item xs /> 
 
@@ -51,7 +51,6 @@ class UserPostCard extends Component {
               <span className="login100-form-title">
                 <b>YAZDIĞIN POSTLAR</b>
               </span>
-
               <PostCard role="admin" postList={this.state.pageOfItems} />
               <div className="row">
                 <div className="col-md-12">
@@ -64,7 +63,7 @@ class UserPostCard extends Component {
               </div>
             </Paper>
           </Grid>
-          <Grid item xs />
+          <Grid item xs /> 
         </Grid>
       </div>
     );

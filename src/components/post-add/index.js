@@ -21,10 +21,10 @@ import * as categoryActions from "../../redux/category/CategoryActions";
 import CkEditor from "./CkEditor";
 import ImageChoose from "./ImageChoose";
 import CategoryList from "./CategoryList";
-import LeftNav from "../../containers/user-profile-container/LeftNav";
+import LeftNav from "../LeftNav/LeftNav";
 import Preview from "./preview";
 import NotFound from "../common/Error404"
-
+import SettingsIcon from '@material-ui/icons/Settings';
 class index extends Component {
   state = {
     imageFile: null,
@@ -34,7 +34,7 @@ class index extends Component {
     title: "",
     categoryList: [],
 
-    tabValue: "1",
+    tabValue: "1", 
     categoryNameList:[]
   };
 
@@ -111,7 +111,7 @@ class index extends Component {
         <TabContext value={this.state.tabValue}>
           <div position="static">
             <TabList onChange={this.changeTab} aria-label="simple tabs example">
-              <Tab label="Post Ekle" value="1" />
+              <Tab label="Post Ekle" icon={<SettingsIcon/>} value="1" />
               <Tab label="Önizleme" value="2" />
             </TabList>
           </div>
@@ -129,7 +129,7 @@ class index extends Component {
               />
 
               <CategoryList checkedChange={this.checkedChange} />
-
+ 
               {/*Title*/}
               <Grid item xs={4} />
               <Grid item xs={4}>
