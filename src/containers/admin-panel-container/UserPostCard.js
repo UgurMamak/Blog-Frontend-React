@@ -41,7 +41,7 @@ class UserPostCard extends Component {
     return (
       <div>
         <LeftNav />
- 
+           
         <Grid container spacing={3}>
           <Grid item xs /> 
 
@@ -49,7 +49,7 @@ class UserPostCard extends Component {
             <Paper style={{ textAlign: "center" }}>
               <br />
               <span className="login100-form-title">
-                <b>YAZDIĞIN POSTLAR</b>
+                <b>YAZDIĞIN cxsfgdPOSTLAR</b>
               </span>
               <PostCard role="admin" postList={this.state.pageOfItems} />
               <div className="row">

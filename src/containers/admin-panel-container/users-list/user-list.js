@@ -14,13 +14,13 @@ export default class Userlist extends Component {
   render() {
     return (
       <TableRow key={this.props.user.id}>
-        <TableCell component="th" scope="row">
+        <TableCell style={{fontSize: "12px" }} component="th" scope="row">
           {this.props.user.firstName}
         </TableCell>
-        <TableCell align="right">{this.props.user.lastName}</TableCell>
-        <TableCell align="right">{this.props.user.email}</TableCell>
-        <TableCell align="right">{this.props.user.role}</TableCell>
-        <TableCell align="right">
+        <TableCell style={{fontSize: "12px" }} align="right">{this.props.user.lastName}</TableCell>
+        <TableCell style={{fontSize: "12px" }} align="right">{this.props.user.email}</TableCell>
+        <TableCell style={{fontSize: "12px" }} align="right">{this.props.user.role}</TableCell>
+        <TableCell style={{fontSize: "12px" }} align="right">
           {" "}
           <RoleSelect
             role={this.props.role}
@@ -30,11 +30,7 @@ export default class Userlist extends Component {
             Güncelle
           </Button>{" "}
         </TableCell>
-        <TableCell align="right">
-          <Button onClick={() => this.props.handleDelete(this.props.user.id)}>
-            Sil
-          </Button>{" "}
-        </TableCell>
+        
       </TableRow>
     );
   }

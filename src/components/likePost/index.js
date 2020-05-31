@@ -26,7 +26,7 @@ class LikePost extends Component {
     } else {
       this.props.actions.likeStatus({
         postId: this.props.postId,
-        userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
+        userId:localStorage.getItem("userId"),
         likeStatus: false,
       });
     }
@@ -38,7 +38,7 @@ class LikePost extends Component {
     } else {
       this.props.actions.likeStatus({
         postId: this.props.postId,
-        userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
+        userId: localStorage.getItem("userId"),
         likeStatus: true,
       });
     }

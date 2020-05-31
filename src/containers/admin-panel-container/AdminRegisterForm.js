@@ -11,6 +11,12 @@ import LeftNav from "../../components/LeftNav/LeftNav";
 
 import SelectBox from "./select-box";
 import NotFound from "../../components/common/Error404";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 class AdminRegisterForm extends Component {
   state = {
     selectedValue: "",
@@ -39,6 +45,8 @@ class AdminRegisterForm extends Component {
         value: "user",
       },
     ],
+
+    alertOpen: false,
   };
 
   changeSelect = (event) => {
@@ -61,8 +69,8 @@ class AdminRegisterForm extends Component {
       this.state.email !== "" &&
       this.state.firstName !== "" &&
       this.state.lastName !== "" &&
-      this.state.password1 !== "" &&
-      this.state.password2 !== "" &&
+    //  this.state.password1 !== "" &&
+    //  this.state.password2 !== "" &&
       this.state.selectedValue !== ""
     ) {
       if (this.state.password1 === this.state.password2) {
@@ -74,6 +82,8 @@ class AdminRegisterForm extends Component {
         data.append("role", this.state.selectedValue);
         data.append("processType", Admin);
         this.props.actions.saveUser(data);
+        this.setState({ alertOpen: true });
+      
       } else {
         this.setState({
           control: true,
@@ -87,6 +97,14 @@ class AdminRegisterForm extends Component {
       });
     }
     event.preventDefault();
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({ alertOpen: false });
+    window.location.reload();
   };
 
   render() {
@@ -122,6 +140,26 @@ class AdminRegisterForm extends Component {
                 ) : (
                   <div className="wrap-input100" />
                 )}
+
+                    {console.log(this.props.user.registerStatus.successfulRegister)}
+                {this.props.user.registerStatus.successfulRegister === 1 ? ( 
+                 <Snackbar
+                 open={this.state.alertOpen}
+                 autoHideDuration={2000}
+                 onClose={this.handleClose}
+               >
+                 <Alert
+                   style={{ width: "400px", fontSize: "20px" }}
+                   onClose={this.handleClose}
+                   severity="success"
+                 >
+                   Üye Oluşturuldu şifresi mail adresine gönderildi.
+                 </Alert>
+               </Snackbar>
+                ) : (
+                  <div className="wrap-input100" />
+                )}
+
                 <br />
                 {/*Mesaj*/}
 
@@ -191,59 +229,8 @@ class AdminRegisterForm extends Component {
                     </div>
                   </div>
 
-                  <div className="form-group">
-                    <div className="col-xs-6">
-                      <div
-                        className="wrap-input100 validate-input"
-                        id="passwordO"
-                        data-validate="Password is required"
-                      >
-                        <input
-                          className="input100"
-                          id="password"
-                          type="password"
-                          onChange={this.handleChange}
-                          name="password1"
-                          placeholder="Parola..."
-                        />
-
-                        <span className="symbol-input102">
-                          <i className="fa fa-eye" />
-                        </span>
-
-                        <span className="focus-input100" />
-                        <span className="symbol-input100">
-                          <i className="fa fa-lock" aria-hidden="true" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <div className="col-xs-6">
-                      <div
-                        className="wrap-input100 validate-input"
-                        data-validate="Password is required"
-                      >
-                        <input
-                          className="input100"
-                          id="passwordAgain"
-                          type="password"
-                          onChange={this.handleChange}
-                          name="password2"
-                          placeholder="Parola tekrar.."
-                        />
-
-                        <span className="symbol-input102">
-                          <i className="fa fa-eye" />
-                        </span>
-
-                        <span className="focus-input100" />
-                        <span className="symbol-input100">
-                          <i className="fa fa-lock" aria-hidden="true" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                  
+                 
                   <div className="form-group">
                     <div className="col-xs-6">
                       <SelectBox

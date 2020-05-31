@@ -115,9 +115,7 @@ class PostCard extends Component {
                   <li>
                     <span className="fa fa-heart"></span> {ps.likeNumber}
                   </li>
-                  {/*<li>
-                    <span className="fa fa-eye"></span> 3
-                  </li>*/}
+
                 </ul>
               </div>
             </div>
