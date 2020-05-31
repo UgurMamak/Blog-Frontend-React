@@ -11,6 +11,7 @@ const GET_USER_SUCCESS = "GET_USER_SUCCESS"; //userları listeleme işlemi için
 const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS"; //yeni user eklemek için
 const CREATE_USER_UNSUCCESS = "CREATE_USER_UNSUCCESS"; //yeni user eklemek için
 const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS"; //güncelleme işlemleri için
+const UPDATE_USER_UNSUCCESS = "UPDATE_USER_UNSUCCESS"; //güncelleme işlemleri için
 const RESET_REGISTER = "RESET_REGISTER";
 
 //LOGIN
@@ -37,7 +38,8 @@ export const actionTypes = {
   POST_IMAGE,
   CREATE_USER_UNSUCCESS,
   FAIL_LOGIN,
-  GET_USER_INFO
+  GET_USER_INFO,
+  UPDATE_USER_UNSUCCESS
 };
 
 //------------------------REGISTER------------------------------------
@@ -53,6 +55,10 @@ export function createUserUnSuccess(user) {
 }
 export function updateUserSuccess(user) {
   return { type: actionTypes.UPDATE_USER_SUCCESS, payload: user };
+}
+
+export function updateUserUnSuccess(user) {
+  return { type: actionTypes.UPDATE_USER_UNSUCCESS, payload: user };
 }
 
 export function resetRegister() {
@@ -122,13 +128,26 @@ export function LoginUser(user) {
   };
 }
 
-//---------------------USER BİLGİLERİ GETİRME
+//---------------------USER BİLGİLERİ GETİRME (IDye göre)
 export function getUser(userId) {
   return function (dispatch) {
     let url = API + "user/getbyuserId/?userId=" + userId;
     axios
       .get(url)
       //.then(response=>{ console.log("data",response.statusText);})
+      .then((result) => {
+        dispatch(getUserSuccess(result.data));
+      })
+      .catch((error) => console.log("USER BİLGİSİ GELRKEN HATA", error));
+  };
+}
+
+//Tüm kullanıcıların user blgilerini getirme işlemi
+export function getAllUser() {
+  return function (dispatch) {
+    let url = API + "user/getalluser";
+    axios
+      .get(url)
       .then((result) => {
         dispatch(getUserSuccess(result.data));
       })
@@ -146,8 +165,10 @@ export function updateUser(user) {
       .then((result) => {
         dispatch(updateUserSuccess(result));
       })
-      .catch((error) => {
-        console.log("USER GÜNCELLERKEN HATA", error);
+      .catch((error) => { 
+        if (error.response.data.status)
+        dispatch(updateUserUnSuccess("USER GÜNCELLERKEN HATA OLUŞTU"));
+      else dispatch(updateUserUnSuccess(error.response.data));
       });
   };
 }
@@ -155,4 +176,23 @@ export function updateUser(user) {
 //GET USER İNFO
 export function userInfo(user) {console.log("user infoaction değeri",user)
   return { type: actionTypes.GET_USER_INFO, payload: user };
+}
+
+
+//USER ROLE Güncelleme
+export function updateUserRole(user) {
+  return function (dispatch) {
+    let url = API + "user/userRoleupdate";
+    axios
+      .post(url, user)
+      .then((response) => response.data)
+      .then((result) => {
+        dispatch(updateUserSuccess(result));
+      })
+      .catch((error) => { 
+        if (error.response.data.status)
+        dispatch(updateUserUnSuccess("USER GÜNCELLERKEN HATA OLUŞTU"));
+      else dispatch(updateUserUnSuccess(error.response.data));
+      });
+  };
 }

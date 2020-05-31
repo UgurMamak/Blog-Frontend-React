@@ -9,13 +9,16 @@ import IconButton from "@material-ui/core/IconButton";
 //actions
 import * as userActions from "../../redux/User/UserActions";
 
+//components
+import PostSticky from "./PostStickyShares"
+
 class UserInfo extends Component {
   state = {
     text:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry" +
       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500" +
       "when an unknown printer took a galley of type and scrambled it to make a",
-  };
+  }; 
 
   componentDidMount() {
     this.props.actions.getUser(this.props.userId);
@@ -68,6 +71,14 @@ class UserInfo extends Component {
                         ) : (
                           <div />
                         )}
+
+                        <PostSticky
+                        facebook={user.facebookLink}
+                        twitter={user.twitterLink}
+                        instagram={user.instagramLink}
+                        />
+
+
                       </div>
                     </div>
                   </div>

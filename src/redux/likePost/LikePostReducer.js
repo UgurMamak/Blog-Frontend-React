@@ -2,7 +2,7 @@ import { actionTypes } from "./LikePostActions";
 const initialState = {
   //message: 0,
   likeValue: {},
-  status:0
+  status:-1
 };
 export default function LikePostReducer(state = initialState, action) {
   switch (action.type) {
@@ -18,13 +18,13 @@ export default function LikePostReducer(state = initialState, action) {
       return {
         ...state,
         likeValue: action.payload,
-        status:0
+        status:-1
       };
 
       case actionTypes.RESET_STATUS:
         return {
           ...state,
-          status:0
+          status:-1
         };
       
     default:

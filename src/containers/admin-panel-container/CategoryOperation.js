@@ -15,7 +15,7 @@ export default class CategoryOperation extends Component {
       return <NotFound/>
     } 
     return (
-      <div>
+      <div className="container bootstrap snippet">
         <LeftNav />
         <Container maxWidth="xl">
           <br />

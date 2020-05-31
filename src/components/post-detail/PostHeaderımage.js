@@ -39,9 +39,9 @@ class PostHeaderımage extends Component {
                 </h1>
                 <ul className="post-meta">
                   <li>
-                    <a href="author.html">
+                    <Link to={"/profile/"+pd.userId}>
                         {pd.firstName+" "+pd.lastName}
-                    </a>
+                    </Link>
                   </li>
                         <li>{pd.created}</li>
                   <li>

@@ -15,7 +15,7 @@ import Pagination from "../../components/paginiton/Paginition";
 import * as postCartActions from "../../redux/cart/PostCartActions";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import { Admin } from "../../helpers/role";
+import { Admin, Operator } from "../../helpers/role";
 class index extends Component {
   //state = { tabValue: "1" };
   //Tab değişikliği işlemi
@@ -57,6 +57,7 @@ class index extends Component {
     this.setState({ pageOfItems: pageOfItems });
   }
 
+  
   renderAdminOrOwner() {
     return (
       <div className="container bootstrap snippet">
@@ -158,24 +159,10 @@ class index extends Component {
         <UserInfo userId={this.props.match.params.userId} />
         <br />
         <br />
-        <TabContext value={this.state.tabValue}>
-          <div position="static">
-            <TabList
-              textColor="secondary"
-              onChange={this.changeTab}
-              aria-label="simple tabs example"
-            >
-              <Tab
-                style={{ fontSize: "10px" }}
-                label="Paylaştığın Postlar"
-                icon={<CheckCircleIcon fontSize="large" />}
-                value="1"
-                onClick={this.sharePost}
-              />
-            </TabList>
-          </div>
+     
+          
 
-          <TabPanel value="1">
+          
             <div className="row">
               <UserPost postList={this.state.pageOfItems} />
               <div className="col-md-12">
@@ -185,8 +172,7 @@ class index extends Component {
                 />
               </div>
             </div>
-          </TabPanel>
-        </TabContext>
+   
       </div>
     )
   }
@@ -194,7 +180,7 @@ class index extends Component {
   render() {
     return (
       <div>
-        {localStorage.getItem("userId") === this.props.match.params.userId ||
+        {(localStorage.getItem("userId") === this.props.match.params.userId && localStorage.getItem("role")===Operator ) ||
         localStorage.getItem("role") === Admin
           ? this.renderAdminOrOwner()
           : this.renderProfile()}

@@ -51,7 +51,7 @@ class Preview extends Component {
                     </h3>
                     <ul className="post-meta">
                       <li>
-                        <a href="author.html">John Doe</a>
+                        <a href="author.html">YAZAR AD SOYAD</a>
                       </li>
                       <li>20 April 2018</li>
                     </ul>

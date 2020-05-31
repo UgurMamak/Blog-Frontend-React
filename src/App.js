@@ -35,6 +35,8 @@ import PostAdd from "./components/post-add/";
 
 import UpdatePost from "./containers/admin-panel-container/update-post";
 
+import AllUsers from  "./containers/admin-panel-container/users-list"
+
 import Deneme from "./containers/user-profile-container/deneme"
 
 export default class App extends Component {
@@ -69,6 +71,9 @@ export default class App extends Component {
           <Route path="/profile/:userId" component={UserProfileContainer} />
           {/*Login yapması zorunlu olan sayfalar*/}
          
+
+          <PrivateRoute path="/AllUser" component={AllUsers} />
+
           <PrivateRoute path="/confirmPostPage" component={ ConfirmPostPage} />
           <PrivateRoute
             exact
@@ -76,6 +81,7 @@ export default class App extends Component {
             component={UpdatePost}
           />
           <PrivateRoute path="/userUpdate/:userId" component={UserOperationContainer} />
+
 
           <PrivateRoute
             path="/categoryOperation"

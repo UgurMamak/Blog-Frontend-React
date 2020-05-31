@@ -28,7 +28,7 @@ class PostDetail extends Component {
     return (
       <div>
         
-        <PostStickyShares />
+        
         <div style={{ clear: "both" }} />
         {/* post content */}
         {this.props.postReducer.postDetail.map((pd) => (

@@ -21,10 +21,9 @@ class LikePost extends Component {
   }
 
   handleDislike = (event) => {
-    if(localStorage.getItem("userId")===null)
-    {alertify.error("Postu beğenmek için sisteme giriş yapmanız gerekiyor.");}
-    else
-    {
+    if (localStorage.getItem("userId") === null) {
+      alertify.error("Postu beğenmek için sisteme giriş yapmanız gerekiyor.");
+    } else {
       this.props.actions.likeStatus({
         postId: this.props.postId,
         userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
@@ -34,17 +33,15 @@ class LikePost extends Component {
   };
 
   handleLike = (event) => {
-    if(localStorage.getItem("userId")===null)
-    {alertify.error("Postu beğenmek için sisteme giriş yapmanız gerekiyor.");}
-    else
-    {
+    if (localStorage.getItem("userId") === null) {
+      alertify.error("Postu beğenmek için sisteme giriş yapmanız gerekiyor.");
+    } else {
       this.props.actions.likeStatus({
         postId: this.props.postId,
         userId: "47c2c1fe-e7b4-42ca-8bfd-734ebf916942",
         likeStatus: true,
       });
     }
-   
 
     // alertify.success(this.props.likeReducer.likeValue.message);
   };
@@ -52,6 +49,7 @@ class LikePost extends Component {
   render() {
     if (this.props.likeReducer.status === 1) {
       alertify.warning(this.props.likeReducer.likeValue.message);
+      this.props.actions.resetStatus();
     }
     return (
       <div>
@@ -87,7 +85,7 @@ function mapDispatchToProps(dispatch) {
     actions: {
       likeStatus: bindActionCreators(likeActions.likePostAdd, dispatch),
       getLikeStatus: bindActionCreators(likeActions.getLikeStatus, dispatch),
-      //resetStatus: bindActionCreators(likeActions.resetStatus, dispatch),
+      resetStatus: bindActionCreators(likeActions.resetStatus, dispatch),
     },
   };
 }

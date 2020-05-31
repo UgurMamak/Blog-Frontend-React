@@ -9,11 +9,9 @@ export default class HomeContainer extends Component {
     return (
       <div>
         {/*-----SliderPost start----*/}
-        <div className="section">
-          <div className="container">
+       
             <SliderPost />
-          </div>
-        </div>
+          
         {/*-----SliderPost end----*/}
 
         <div className="section">

@@ -5,12 +5,18 @@ import { API } from "../../helpers/api-config";
 
 //actions
 import * as userActions from "../../redux/User/UserActions";
- 
+
 //componenets
 import ImageChoose from "./ImageChoose";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+import SocialMedia from "./SocialMedia";
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class UserUpdateForm extends Component {
-  
   componentDidMount() {
     this.props.actions.getUser(localStorage.getItem("userId"));
   }
@@ -24,8 +30,14 @@ class UserUpdateForm extends Component {
     password1: "",
     password2: "",
 
+    instagramLink: "",
+    twitterLink: "",
+    facebookLink: "",
+
     control: false,
     controlMessage: "",
+
+    open: false,
   };
 
   /*
@@ -39,7 +51,7 @@ class UserUpdateForm extends Component {
   //Resim seç butonu
   handleFileUpload = async (event) => {
     this.setState({ imageFile: event.target.files[0] });
-    this.setState({ imagePath: URL.createObjectURL(event.target.files[0]) });   
+    this.setState({ imagePath: URL.createObjectURL(event.target.files[0]) });
   };
 
   handleChange = (event) => {
@@ -51,13 +63,13 @@ class UserUpdateForm extends Component {
     });
   };
 
- // handleUpdate(event){
-  handleUpdate=(event)=>{
-    //event.preventDefault(); 
+  // handleUpdate(event){
+  handleUpdate = (event) => {
+    //event.preventDefault();
     //console.log("BUTON TIKLANINCA",this.props.user);
     this.props.user.forEach((item) => {
       this.state.imageName = item.imageName;
-     // console.log(item);
+      // console.log(item);
     });
 
     if (
@@ -79,9 +91,12 @@ class UserUpdateForm extends Component {
         data.append("Id", localStorage.getItem("userId"));
         data.append("firstName", this.state.firstName);
         data.append("lastName", this.state.lastName);
-        console.log("eski", this.props.user);
+        data.append("instagramLink", this.state.instagramLink);
+        data.append("twitterLink", this.state.twitterLink);
+        data.append("facebookLink", this.state.facebookLink);
         this.props.actions.updateUser(data);
-        console.log("yeni", this.props.user);
+        this.setState({ open: true });
+        event.preventDefault();
       } else {
         event.preventDefault();
         this.setState({
@@ -91,13 +106,20 @@ class UserUpdateForm extends Component {
       }
     }
     this.props.actions.getUser(localStorage.getItem("userId"));
-    
-  }
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({ open: false });
+    window.location.reload();
+  };
 
   render() {
     return (
       <div style={{}}>
-        {console.log("USER BİLGİSİ",this.props.user)}
+        {console.log("USER BİLGİSİ", this.props.user)}
         {console.log("update", this.props.updateUser)}
         {this.props.user.map((user) => (
           <div key={user.id} className="container bootstrap snippet">
@@ -105,17 +127,27 @@ class UserUpdateForm extends Component {
               <div className="col-sm-10">
                 <h1>{user.firstName + "  " + user.lastName}</h1>
               </div>
-            </div> 
+            </div>
             <div className="row">
-              <ImageChoose
-                handleFileUpload={this.handleFileUpload}
-                imageFile={this.state.imageFile}
-                imagePath={
-                  this.state.imagePath === ""
-                    ? API + "userImage/" + user.imageName
-                    : this.state.imagePath
-                }
-              />
+              <div className="col-sm-3">
+                <ImageChoose
+                  handleFileUpload={this.handleFileUpload}
+                  imageFile={this.state.imageFile}
+                  imagePath={
+                    this.state.imagePath === ""
+                      ? API + "userImage/" + user.imageName
+                      : this.state.imagePath
+                  }
+                />
+
+                <SocialMedia
+                  socialList={{
+                    instagram: user.instagramLink,
+                    twitter: user.twitterLink,
+                    facebook: user.facebookLink,
+                  }}
+                />
+              </div>
               <div className="col-sm-9">
                 {/*Mesaj*/}
                 {this.state.control === true ? (
@@ -126,6 +158,32 @@ class UserUpdateForm extends Component {
                 ) : (
                   <div className="wrap-input100" />
                 )}
+                {this.props.updateUser.successfulUpdate === 0 ? (
+                  <div
+                    data-validate={this.props.updateUser.updateMessage}
+                    className="wrap-input100 alert-validate"
+                  />
+                ) : (
+                  <div className="wrap-input100" />
+                )}
+                {this.props.updateUser.successfulUpdate === 1 ? (
+                  <Snackbar
+                    open={this.state.open}
+                    autoHideDuration={2000}
+                    onClose={this.handleClose}
+                  >
+                    <Alert
+                      style={{ width: "400px", fontSize: "20px" }}
+                      onClose={this.handleClose}
+                      severity="success"
+                    >
+                      Bilgileriniz güncellendi
+                    </Alert>
+                  </Snackbar>
+                ) : (
+                  <div />
+                )}
+
                 {/*Mesaj*/}
                 <hr />
                 <form className="form">
@@ -203,6 +261,50 @@ class UserUpdateForm extends Component {
                       />
                     </div>
                   </div>
+
+                  <div className="form-group">
+                    <div className="col-xs-6">
+                      <label htmlFor="first_name">
+                        <h4>Instagram</h4>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="instagramLink"
+                        placeholder="instagram link"
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <div className="col-xs-6">
+                      <label htmlFor="first_name">
+                        <h4>Twitter</h4>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="twitterLink"
+                        placeholder="Twitter link"
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <div className="col-xs-6">
+                      <label htmlFor="first_name">
+                        <h4>Facebook</h4>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="facebookLink"
+                        placeholder="Facebook link"
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
+
                   <div className="form-group"></div>
                   <div className="col-xs-3">
                     <br />
@@ -228,7 +330,7 @@ class UserUpdateForm extends Component {
       </div>
     );
   }
-} 
+}
 
 function mapStateToProps(state) {
   return {

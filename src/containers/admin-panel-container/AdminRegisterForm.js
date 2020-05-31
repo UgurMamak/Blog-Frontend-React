@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {Admin} from "../../helpers/role"
+import { Admin } from "../../helpers/role";
 //actions
 import * as userActions from "../../redux/User/UserActions";
 
@@ -10,7 +10,7 @@ import * as userActions from "../../redux/User/UserActions";
 import LeftNav from "../../components/LeftNav/LeftNav";
 
 import SelectBox from "./select-box";
-import NotFound from "../../components/common/Error404"
+import NotFound from "../../components/common/Error404";
 class AdminRegisterForm extends Component {
   state = {
     selectedValue: "",
@@ -24,17 +24,17 @@ class AdminRegisterForm extends Component {
     controlMessage: null,
     role: [
       {
-        id:1,
+        id: 1,
         name: "Admin",
         value: "SystemAdmin",
       },
       {
-        id:2,
+        id: 2,
         name: "Operator",
         value: "Operator",
       },
       {
-        id:3,
+        id: 3,
         name: "user",
         value: "user",
       },
@@ -68,11 +68,11 @@ class AdminRegisterForm extends Component {
       if (this.state.password1 === this.state.password2) {
         const data = new FormData();
         data.append("email", this.state.email);
-       // data.append("password", this.state.password1);
+        // data.append("password", this.state.password1);
         data.append("firstName", this.state.firstName);
         data.append("lastName", this.state.lastName);
         data.append("role", this.state.selectedValue);
-        data.append("processType",Admin);
+        data.append("processType", Admin);
         this.props.actions.saveUser(data);
       } else {
         this.setState({
@@ -90,29 +90,21 @@ class AdminRegisterForm extends Component {
   };
 
   render() {
-
-    if(localStorage.getItem("role")!==Admin)
-    {
-      return <NotFound/>
-    } 
+    if (localStorage.getItem("role") !== Admin) {
+      return <NotFound />;
+    }
     return (
       <div>
-        <div>
+        <div className="container bootstrap snippet">
           <LeftNav />
-          <div className="container bootstrap snippet">
-          
-            <div className="row">
-              <div className="col-sm-10"></div>
-             
-            </div>
-            <div className="row">
-              <div className="col-sm-9">
-                <br/>
-              <span className="login100-form-title">
-                <b>Üye Ekle</b>
-              </span>
+          <div>
+            <br />
+            <span className="login100-form-title">
+              <b>Üye Ekle</b>
+            </span>
+            <div >
+              <div >
                 <hr />
-                
                 {/*Mesaj*/}
                 {this.state.control === true ? (
                   <div
@@ -130,7 +122,7 @@ class AdminRegisterForm extends Component {
                 ) : (
                   <div className="wrap-input100" />
                 )}
-                <br/>
+                <br />
                 {/*Mesaj*/}
 
                 <form className="form">
@@ -254,7 +246,7 @@ class AdminRegisterForm extends Component {
                   </div>
                   <div className="form-group">
                     <div className="col-xs-6">
-                      <SelectBox 
+                      <SelectBox
                         items={this.state.role}
                         changeSelect={this.changeSelect}
                         openSelect={this.openSelect}
@@ -267,9 +259,6 @@ class AdminRegisterForm extends Component {
                   <div className="form-group"></div>
 
                   <div className="col-xs-3">
-                    
-                   
-
                     <button
                       className="login100-form-btn"
                       onClick={this.handleSave}
@@ -286,9 +275,7 @@ class AdminRegisterForm extends Component {
               </div>
               {/*/tab-content*/}
             </div>
-          
           </div>
-          
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ export default class RoleSelectBox extends Component {
         <FormControl
           className="wrap-input100 validate-input"
           variant="outlined"
-          style={{ width: "400px" }}
+          style={{ width: "550px" }}
         >
           <InputLabel id="demo-controlled-open-select-label">Yetki</InputLabel>
           <div

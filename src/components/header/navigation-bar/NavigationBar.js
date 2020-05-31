@@ -22,7 +22,6 @@ class NavigationBar extends Component {
   render() {
     return (
       <div id="nav-bottom">
-        {console.log("userId",localStorage.getItem("userId"))}
         <div className="container">
           <ul className="nav-menu">
             <li>
