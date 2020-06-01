@@ -147,7 +147,7 @@ class LoginForm extends Component {
       return <Redirect to={"/profile/"+this.props.user.userId} />; // kullanıcı adı ve şifre doğru ie home sayfasına yönlendirilir.
     }
 
-    if(localStorage.getItem("userId")!==null)
+    if(localStorage.getItem("userId")!==null) 
     {
       return <Redirect to={"/profile/"+localStorage.getItem("userId")} />
     }

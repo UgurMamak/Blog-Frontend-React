@@ -89,6 +89,17 @@ export function saveUser(user) {
       .post(url, user)
       .then((response) => response.data)
       .then((result) => {
+        const token = result.token;
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", result.userId);
+
+        setAuthorizationToken(token);
+
+        var role;
+        result.role.map((m) => {
+          if (m.name) role = m.name;
+        });
+        localStorage.setItem("role", role);
         dispatch(createUserSuccess(result));
       })
       .catch((error) => {

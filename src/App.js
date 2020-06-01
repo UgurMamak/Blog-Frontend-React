@@ -45,7 +45,7 @@ export default class App extends Component {
       <div>
         <Header />
         <Switch>
-        <Route exact path="/deneme" component={UserPostCart} />
+        <Route exact path="/deneme" component={Deneme} />
           <Route exact path="/" render={() => <Redirect to="home" />} />
           <Route exact path="/home" component={HomeContainer} />
           <Route

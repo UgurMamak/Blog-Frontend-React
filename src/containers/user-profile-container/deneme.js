@@ -1,42 +1,93 @@
-import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import CKEditor from 'ckeditor4-react';
 
-export default class deneme extends Component {
-  state = {
-    anchorEl: null,
-  };
-  handleClick = (event) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-  render() {
-    return (
-      <div>
-        <IconButton
-          aria-label="more"
-          aria-controls="long-menu"
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          <MoreVertIcon />
-        </IconButton>
-        <Menu
-          id="simple-menu"
-          anchorEl={this.state.anchorEl}
-          keepMounted
-          open={Boolean(this.state.anchorEl)}
-          onClose={this.handleClose}
-        >
-          <MenuItem onClick={this.handleClose}>Sil</MenuItem>
-          <MenuItem onClick={this.handleClose}>Güncelle</MenuItem>
-        </Menu>
-      </div>
-    );
-  }
+export default class TwoWayBinding extends Component {
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			data: '<p>This is a CKEditor 4 WYSIWYG editor instance created by ️⚛️ React.</p>'
+		};
+
+		this.handleChange = this.handleChange.bind( this );
+		this.onEditorChange = this.onEditorChange.bind( this );
+	}
+
+	onEditorChange( evt ) {
+		this.setState( {
+			data: evt.editor.getData()
+		} );
+	}
+
+	handleChange( changeEvent ) {
+		this.setState( {
+			data: changeEvent.target.value
+		} );
+	}
+
+	render() {
+		return (
+			<div>
+				<SourceEditor data={this.state.data} handler={this.handleChange} />
+
+				<div style={{overflow: 'auto'}}>
+					<CKEditor
+						data={this.state.data}
+						onChange={this.onEditorChange}
+						style={{
+							float: 'left',
+							width: '50%'
+						}}
+					/>
+			
+				</div>
+			</div>
+		);
+	}
+}
+
+
+class SourceEditor extends Component {
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			focused: false
+		};
+	}
+
+	render() {
+		var textareaValue = {};
+
+		if ( !this.state.focused ) {
+			textareaValue = {
+				value: this.props.data
+			};
+		}
+
+		return (
+			<>
+				<p>
+					<label htmlFor="editor-editor">The editor content:</label>
+				</p>
+				<p>
+					<textarea
+						id="editor-editor"
+						className="binding-editor"
+						{...textareaValue}
+						onChange={this.props.handler}
+						onFocus={ () => { this.setState( {
+								focused: true
+							} );
+						}}
+						onBlur={ () => { this.setState( {
+								focused: false
+							} );
+						}}
+					/>
+				</p>
+			</>
+		);
+	}
 }
