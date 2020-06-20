@@ -20,6 +20,7 @@ import ConfirmPostReducer from "./cart/ConfirmPostReducer"
 
 //comment
 import SaveCommentReducer from "./comment/SaveCommentReducer"
+import  CommentUpdateReducer from "./comment/commentUpdateReducer"
 
 //LikePost
 import LikePostReducer from "./likePost/LikePostReducer"
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
     ConfirmPostReducer,
   
     SaveCommentReducer,
+    CommentUpdateReducer,
 
     LikePostReducer,
 

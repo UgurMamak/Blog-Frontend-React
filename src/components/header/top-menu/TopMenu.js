@@ -10,7 +10,7 @@ export default class TopMenu extends Component {
       <div id="nav-top">
         <div className="container">
           <NavSocial />
-       
+      <NavLogo/> 
           <NavBtn />
         </div>
       </div>

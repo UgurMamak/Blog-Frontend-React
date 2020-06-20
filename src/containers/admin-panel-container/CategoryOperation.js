@@ -19,9 +19,9 @@ export default class CategoryOperation extends Component {
         <LeftNav />
         <Container maxWidth="xl">
           <br />
-          <CategoryAdd/>
+          <CategoryAdd/> 
           <br />
-          <CategoryList/>
+          <CategoryList/> 
         </Container>
       </div>
     );

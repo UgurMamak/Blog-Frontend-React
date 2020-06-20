@@ -15,7 +15,7 @@ class CategoryAdd extends Component {
     categoryName: "",
     open: false,
     control: false,
-    controlMessage: "",
+    controlMessage: "", 
   };
   handleSave = (event) => {
     if (this.state.categoryName !== "") {

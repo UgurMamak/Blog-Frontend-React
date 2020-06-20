@@ -7,7 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 export default class CategorySelectBox extends Component {
   render() {
     return (
-      <div>
+      <div> 
         <FormControl
           className="wrap-input100 validate-input"
           variant="outlined"

@@ -27,8 +27,6 @@ class PostDetail extends Component {
   renderPostDetail() {
     return (
       <div>
-        
-        
         <div style={{ clear: "both" }} />
         {/* post content */}
         {this.props.postReducer.postDetail.map((pd) => (
