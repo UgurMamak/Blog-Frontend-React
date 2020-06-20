@@ -6,7 +6,6 @@ import Tab from "@material-ui/core/Tab";
 import TabContext from "@material-ui/lab/TabContext";
 import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel";
-import SettingsIcon from "@material-ui/icons/Settings";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";

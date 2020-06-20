@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import { API } from "../../helpers/api-config";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
 import { Admin } from "../../helpers/role";
+import CardHeader from "@material-ui/core/CardHeader";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import {
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu,
+} from "reactstrap";
 
 //actions
 import * as categoryActions from "../../redux/category/CategoryActions";
@@ -83,26 +88,36 @@ class PostCard extends Component {
             {localStorage.getItem("userId") === ps.userId ||
             localStorage.getItem("role") === Admin ? (
               <div>
-                <Link to={"/updatePost/" + ps.postId}>
-                  <IconButton
-                    aria-label="more"
-                    aria-controls="long-menu"
-                    aria-haspopup="true"
-                  >
-                    <UpdateIcon />
-                    güncelle
-                  </IconButton>
-                </Link>
+                
 
-                <IconButton
-                  aria-label="more"
-                  aria-controls="long-menu"
-                  aria-haspopup="true"
-                  onClick={() => this.handleDeletePost(ps)}
-                >
-                  <DeleteIcon />
-                  Sil
-                </IconButton>
+                <CardHeader
+                        action={
+                          <UncontrolledDropdown>
+                            <DropdownToggle tag="a" className="nav-link">
+                              <MoreVertIcon style={{ cursor: "pointer" }} />
+                            </DropdownToggle>
+                            <DropdownMenu size="sm">
+                              <DropdownItem
+                                style={{ cursor: "pointer" }}
+                                
+                                onClick={() => this.handleDeletePost(ps)}
+                              >
+                                Sil
+                              </DropdownItem>
+
+                              <DropdownItem>
+                                <a href={"/updatePost/" + ps.postId}>
+                                  Güncelle
+                                </a>
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
+                        }
+                        
+                      />
+
+
+
               </div>
             ) : (
               <div />
