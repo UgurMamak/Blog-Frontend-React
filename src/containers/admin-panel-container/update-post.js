@@ -23,6 +23,7 @@ import CategoryList from "../../components/post-add/CategoryList";
 //actions
 import * as postActions from "../../redux/post/postActions";
 import * as postCartActions from "../../redux/cart/PostCartActions";
+import { Admin } from "../../helpers/role";
 
 class UpdatePost extends Component {
   state = {
@@ -97,11 +98,19 @@ class UpdatePost extends Component {
   }
 
   renderPostDetail() {
+    var post=this.props.postReducer.postDetail;
+    console.log("reducer değer",post[0].userId);
+
+    if(localStorage.getItem("userId")!==post[0].userId && localStorage.getItem("role")!==Admin)
+    {
+      return <NotFount/>
+    }
+
     return (
       <div>
         <LeftNav />
         <br />
-        {console.log("post bilgisi", this.props.postReducer.postDetail)}
+        {console.log("post bilgisi", this.props.postReducer.postDetail.userId)}
 
         {this.props.postReducer.postDetail.map((post) => (
           <div key={post.postId}>
@@ -197,6 +206,7 @@ class UpdatePost extends Component {
   }
 
   render() {
+  
     return (
       <div>
         {this.props.postReducer.postDetailStatus.successfulPost === 1
