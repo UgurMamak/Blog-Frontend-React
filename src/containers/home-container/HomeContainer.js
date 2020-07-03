@@ -9,8 +9,8 @@ export default class HomeContainer extends Component {
     return (
       <div>
         {/*-----SliderPost start----*/}
-       
-            <SliderPost />
+        
+            <SliderPost /> 
           
         {/*-----SliderPost end----*/}
 

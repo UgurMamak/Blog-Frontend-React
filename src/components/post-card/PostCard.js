@@ -78,13 +78,13 @@ class PostCard extends Component {
                 </IconButton>
                 </Link>
               </div>
-            ) : (
+            ) : ( 
               <div />
             )}
 
             <div className="post">
               <Link className="post-img" to={"PostDetail/" + ps.postId}>
-                <img src={API + "postImage/" + ps.imageName} alt="" />
+                <img src={API + "postImage/" + ps.imageName} style={{"width":"360px", "height":"240px"}} alt=""  />
               </Link> 
               <div className="post-body">
                 <div className="post-category">

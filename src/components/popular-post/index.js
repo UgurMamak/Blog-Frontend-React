@@ -35,7 +35,7 @@ class index extends Component {
             <div key={ post.postId} className="post post-widget">
              
               <a className="post-img" href={"/PostDetail/" + post.postId}>
-                <img src={API + "postImage/" + post.imageName} alt="" />
+                <img src={API + "postImage/" + post.imageName} style={{"width":"130px", "height":"87px"}} alt="" />
               </a>
               <div className="post-body">
                 <div className="post-category">

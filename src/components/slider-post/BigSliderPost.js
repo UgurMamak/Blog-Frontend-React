@@ -8,7 +8,7 @@ export default class BigSliderPost extends Component {
       <div className="post post-thumb">
         
         <Link className="post-img" to={"PostDetail/" + this.props.post.postId}>
-          <img src={API + "postImage/" + this.props.post.imageName} alt="" />
+          <img src={API + "postImage/" + this.props.post.imageName} style={{"width":"760px", "height":"510px"}} alt="" />
         </Link>
         <div className="post-body">
           <div className="post-category">

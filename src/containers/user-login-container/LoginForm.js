@@ -116,12 +116,7 @@ class LoginForm extends Component {
                 </button>
               </div>
 
-              <div className="text-center p-t-12">
-                <span className="txt2">Forgot</span>
-                <a className="txt2" href="/">
-                  Username / Password?
-                </a>
-              </div>
+           
 
               <div className="text-center p-t-136">
                 <Link className="txt2" to={"/register"}>
