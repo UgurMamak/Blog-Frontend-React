@@ -307,7 +307,7 @@ render'dan önce tetiklenir. (VDOM'dan DOM'a akratım gerçekleşmeden önce ça
 **componentDidMount**
 render işleminden sonra çalışır.
 setState işlemleri, servis çağrıları,  Redux bağlantısı apiye bağlanma gibi işlemler burada yapılabilir. 
-
+<h2 id="Fetching">Fetching</h2>
 **Updation**
 Bir componentin state veya props'unun update edilmesiyle tekrardan render edilmesi sonucu çağrılan methodlardır.
 **componentWillReceiveProps**
@@ -345,6 +345,7 @@ Hali hazırdaki props değeri ile bir önceki props’u karşılaştırmak için
     componentDidUpdate(prevProps,prevState){}
 
 # Fetching
+
 Javascript'in fonksiyonudur. Api'ye bağlanarak data çekme işlemleri yapılabilir. 
 
     fetch('url')
