@@ -29,7 +29,7 @@
 		  - [ComponentDidUpdate]()
 11. [Fetching](#Fetching)
 
-<a href="#Fetching"> deneme</a>
+<a href="#d1"> deneme</a>
 
 
 ## DOM (Document Object Model)
@@ -307,7 +307,7 @@ render'dan önce tetiklenir. (VDOM'dan DOM'a akratım gerçekleşmeden önce ça
 **componentDidMount**
 render işleminden sonra çalışır.
 setState işlemleri, servis çağrıları,  Redux bağlantısı apiye bağlanma gibi işlemler burada yapılabilir. 
-<h2 id="Fetching">Fetching</h2>
+
 **Updation**
 Bir componentin state veya props'unun update edilmesiyle tekrardan render edilmesi sonucu çağrılan methodlardır.
 **componentWillReceiveProps**
@@ -406,4 +406,4 @@ vdom: virtual dom
 >[5]https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 [6]https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 [7]https://programmingwithmosh.com/javascript/stateful-stateless-components-react/#:~:text=Stateful%20and%20stateless%20components%20have%20many%20different%20names.&text=The%20literal%20difference%20is%20that,always%20render%20the%20same%20thing.
-
+<h2 id="d1">Fetching</h2>
