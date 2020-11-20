@@ -27,9 +27,9 @@
 	  - [Updation]()
 		  - [ComponentWillUpdate]()
 		  - [ComponentDidUpdate]()
-11. [Fetching](#Fetching (Getirmek))
+11. [Fetching](#Fetching)
 
-<a href="#Fetching (Getirmek)"> deneme</a>
+<a href="#Fetching"> deneme</a>
 
 
 ## DOM (Document Object Model)
@@ -344,7 +344,7 @@ Hali hazırdaki props değeri ile bir önceki props’u karşılaştırmak için
 
     componentDidUpdate(prevProps,prevState){}
 
-# Fetching (Getirmek)
+# Fetching
 Javascript'in fonksiyonudur. Api'ye bağlanarak data çekme işlemleri yapılabilir. 
 
     fetch('url')
