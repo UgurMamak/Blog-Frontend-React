@@ -27,9 +27,9 @@
 	  - [Updation]()
 		  - [ComponentWillUpdate]()
 		  - [ComponentDidUpdate]()
-11. [Fetching](#Fetching)
+11. [Fetching](#Fetching (Getirmek))
 
-<a href="#Fetching"> deneme</a>
+<a href="#Fetching (Getirmek)"> deneme</a>
 
 
 ## DOM (Document Object Model)
