@@ -16,7 +16,7 @@
     "ckeditor4-react": "^1.1.0",
     "cross-fetch": "^3.0.4",
     "jwt-decode": "^2.2.0",
-    "node-sass": "^4.14.0",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-avatar-editor": "^11.0.9",
     "react-dom": "^16.13.1",
